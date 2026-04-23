@@ -263,6 +263,28 @@
             color: rgba(255,255,255,0.5); font-size: 0.875rem;
         }
         
+        /* Contact Section */
+        .contact-section { padding: 6rem 2rem; background: var(--bg-alt); }
+        .contact-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .contact-form-wrapper { background: white; padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border); }
+        .contact-form-wrapper h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text); }
+        .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.875rem; font-weight: 500; color: var(--text); }
+        .form-input, .form-textarea { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; transition: all 0.2s; }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .form-submit-btn { background: var(--primary); color: white; padding: 0.875rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .form-submit-btn:hover { background: var(--primary-dark); }
+        .form-note { font-size: 0.875rem; color: var(--text-light); margin-top: 0.5rem; }
+        .contact-info-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
+        .contact-info-wrapper h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text); }
+        .contact-card { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem; background: white; border-radius: 8px; border: 1px solid var(--border); }
+        .contact-icon { font-size: 1.5rem; }
+        .contact-details h4 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+        .contact-details p { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem; }
+        .contact-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.875rem; }
+        .contact-link:hover { text-decoration: underline; }
+        
         /* Mobile */
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
@@ -273,6 +295,7 @@
             .pricing-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
             .nav-links { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -499,7 +522,7 @@
                     <div class="blog-meta">April 15, 2026 · 5 min read</div>
                     <h3>How to Choose the Right AI Tools for Your Business in 2026</h3>
                     <p>With hundreds of AI tools available, how do you pick the ones that actually solve your problems? We break down the decision framework we use with every client.</p>
-                    <a href="#" class="read-more">Read More →</a>
+                    <a href="blog/ai-tools-2026.html" class="read-more">Read More →</a>
                 </div>
             </article>
             <article class="blog-card">
@@ -508,7 +531,7 @@
                     <div class="blog-meta">April 10, 2026 · 7 min read</div>
                     <h3>ROI Calculator: How Much Could AI Automation Save Your Business?</h3>
                     <p>Use our interactive calculator to estimate time and cost savings from automating common business tasks like customer support, data entry, and reporting.</p>
-                    <a href="#" class="read-more">Read More →</a>
+                    <a href="blog/roi-calculator.html" class="read-more">Read More →</a>
                 </div>
             </article>
             <article class="blog-card">
@@ -517,7 +540,7 @@
                     <div class="blog-meta">April 5, 2026 · 4 min read</div>
                     <h3>5 AI Automations Every Small Business Should Have by Now</h3>
                     <p>From lead response to expense categorization — these are the automations that deliver the fastest ROI for businesses with 5-50 employees.</p>
-                    <a href="#" class="read-more">Read More →</a>
+                    <a href="blog/5-automations-small-business.html" class="read-more">Read More →</a>
                 </div>
             </article>
         </div>
@@ -576,11 +599,71 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <h2>Ready to Automate Your Business?</h2>
-        <p>Book a free 30-minute discovery call. We'll analyze your operations and show you exactly where AI can save you time and money.</p>
-        <a href="mailto:info@aidynamic.pro?subject=Discovery Call Request" class="cta-btn-light">Book Free Discovery Call</a>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-header">
+            <h2>Ready to Automate Your Business?</h2>
+            <p>Get in touch or book a free 30-minute discovery call. We'll analyze your operations and show you exactly where AI can save you time and money.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-form-wrapper">
+                <h3>Send Us a Message</h3>
+                <form action="https://formspree.io/f/info@aidynamic.pro" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required class="form-input" placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required class="form-input" placeholder="john@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company" class="form-input" placeholder="Your Business LLC">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">How can we help? *</label>
+                        <textarea id="message" name="message" required class="form-textarea" rows="4" placeholder="Tell us about your business and what you'd like to automate..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-btn">Send Message</button>
+                    <p class="form-note">We typically respond within 24 hours.</p>
+                </form>
+            </div>
+            <div class="contact-info-wrapper">
+                <h3>Or Book a Call</h3>
+                <div class="contact-card">
+                    <div class="contact-icon">📅</div>
+                    <div class="contact-details">
+                        <h4>Free Discovery Call</h4>
+                        <p>30 minutes to discuss your automation needs</p>
+                        <a href="https://calendly.com/aidynamicpro/discovery" target="_blank" class="contact-link">Book on Calendly →</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>Email Us</h4>
+                        <p>info@aidynamic.pro</p>
+                        <a href="mailto:info@aidynamic.pro" class="contact-link">Send Email →</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h4>Call or Text</h4>
+                        <p>(305) 555-0123</p>
+                        <a href="tel:+13055550123" class="contact-link">Call Now →</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Miami, FL<br>Serving businesses worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -612,7 +695,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 AI Dynamic Pro. All rights reserved. | <a href="#" style="color: rgba(255,255,255,0.5);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.5);">Terms of Service</a></p>
+            <p>© 2026 AI Dynamic Pro. All rights reserved. | <a href="privacy.html" style="color: rgba(255,255,255,0.5);">Privacy Policy</a> | <a href="terms.html" style="color: rgba(255,255,255,0.5);">Terms of Service</a></p>
         </div>
     </footer>
 
@@ -666,6 +749,26 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
+        });
+        
+        // Formspree form success handler
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const data = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    form.innerHTML = '<div style="text-align:center;padding:2rem;"><div style="font-size:3rem;margin-bottom:1rem;">✅</div><h3 style="color:var(--primary);margin-bottom:0.5rem;">Message Sent!</h3><p style="color:var(--text-light);">We\'ll get back to you within 24 hours.</p></div>';
+                } else {
+                    alert('Oops! There was a problem sending your message. Please try again or email us directly at info@aidynamic.pro');
+                }
+            }).catch(error => {
+                alert('Oops! There was a problem sending your message. Please try again or email us directly at info@aidynamic.pro');
+            });
         });
     </script>
 </body>
