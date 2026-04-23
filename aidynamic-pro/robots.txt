@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aidynamic.pro/sitemap.xml
+
+# Crawl-delay for AI bots
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
