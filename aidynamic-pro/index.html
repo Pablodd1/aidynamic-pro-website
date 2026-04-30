@@ -101,6 +101,39 @@
         }
         .cta-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
         
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        .mobile-only { display: none; }
+        .desktop-only { display: inline-flex; }
+        
         /* Hero Section */
         .hero {
             padding: 10rem 2rem 6rem; max-width: 1200px; margin: 0 auto;
@@ -294,8 +327,50 @@
             .process-step::after { display: none; }
             .pricing-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; }
             .contact-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile Menu */
+            .menu-toggle { display: flex; }
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                gap: 0;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li {
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links a {
+                display: block;
+                padding: 1rem 0;
+                font-size: 1.125rem;
+            }
+            .nav-links .cta-btn {
+                margin-top: 1rem;
+                text-align: center;
+                justify-content: center;
+            }
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 998;
+            }
+            .menu-overlay.active { display: block; }
         }
     </style>
 </head>
@@ -311,15 +386,24 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="logo">AI Dynamic Pro</a>
-        <ul class="nav-links">
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#blog">Blog</a></li>
             <li><a href="#faq">FAQ</a></li>
+            <li class="mobile-only"><a href="#contact" class="cta-btn">Get Started</a></li>
         </ul>
-        <a href="#contact" class="cta-btn">Get Started</a>
+        <a href="#contact" class="cta-btn desktop-only">Get Started</a>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -715,6 +799,25 @@
         setTimeout(() => {
             if (splashOverlay.style.display !== 'none') skipSplash();
         }, 8000);
+        
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menuOverlay = document.getElementById('menu-overlay');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('nav-links');
+                if (navLinks.classList.contains('active')) toggleMenu();
+            });
+        });
         
         // FAQ Toggle
         function toggleFaq(element) {
