@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Neural Wave Mark -->
+  <g transform="translate(25, 15)">
+    <!-- Brain/neural silhouette -->
+    <path d="M45 10 C65 5, 80 15, 85 30 C90 45, 80 60, 70 70 C60 80, 40 80, 30 70 C20 60, 10 50, 15 35 C20 20, 25 15, 45 10Z" fill="none" stroke="url(#grad2)" stroke-width="2" filter="url(#glow)"/>
+    <!-- Neural pathways inside -->
+    <path d="M30 35 Q45 25 55 35 Q65 45 50 55 Q35 65 30 50" fill="none" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+    <path d="M40 25 Q55 20 65 30 Q70 40 60 50" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+    <!-- Synapse dots -->
+    <circle cx="30" cy="35" r="3" fill="#06b6d4">
+      <animate attributeName="r" values="3;4;3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="55" cy="35" r="3" fill="#3b82f6">
+      <animate attributeName="r" values="3;4;3" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="55" r="3" fill="#8b5cf6">
+      <animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="65" cy="30" r="2.5" fill="#06b6d4" opacity="0.8"/>
+    <circle cx="35" cy="50" r="2.5" fill="#3b82f6" opacity="0.8"/>
+    <!-- Pulse ring -->
+    <circle cx="50" cy="42" r="35" fill="none" stroke="#06b6d4" stroke-width="0.5" opacity="0.3">
+      <animate attributeName="r" values="35;38;35" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- Text -->
+  <text x="125" y="52" font-family="'Space Grotesk', sans-serif" font-size="30" font-weight="700" fill="#e2e8f0" letter-spacing="-1">AI Dynamic</text>
+  <text x="125" y="82" font-family="'Space Grotesk', sans-serif" font-size="30" font-weight="700" fill="url(#grad2)" letter-spacing="-1">Pro</text>
+  <line x1="125" y1="92" x2="260" y2="92" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+  <text x="125" y="108" font-family="'Inter', sans-serif" font-size="9" fill="#64748b" letter-spacing="4">SMART AUTOMATION</text>
+</svg>
