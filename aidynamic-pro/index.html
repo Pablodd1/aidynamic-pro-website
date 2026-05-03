@@ -97,6 +97,15 @@
       z-index: 0;
       pointer-events: none;
     }
+    
+    /* ── MATRIX DIGITAL RAIN ── */
+    #matrix-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.15;
+      pointer-events: none;
+    }
 
     /* ── NAVIGATION ── */
     .nav {
@@ -618,6 +627,19 @@
       .section { padding: 4rem 1.5rem; }
     }
 
+    /* ── FOUNDER SECTION ── */
+    @media (max-width: 768px) {
+      #founder div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+      }
+      #founder img {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto 1rem !important;
+      }
+    }
+
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--midnight); }
@@ -637,6 +659,7 @@
   </div>
 
   <!-- Particle Background -->
+  <canvas id="matrix-canvas"></canvas>
   <canvas id="particle-canvas"></canvas>
 
   <!-- Navigation -->
@@ -647,6 +670,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#trust">Results</a></li>
+      <li><a href="#founder">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get Started</a>
@@ -893,6 +917,51 @@
     </div>
   </section>
 
+  <!-- Founder Section -->
+  <section class="section" id="founder" style="padding: 6rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+      <div style="text-align: center;">
+        <img src="images/founder.jpg" alt="Jasmel Acosta - Founder of AI Dynamic Pro" style="width: 260px; height: 260px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(59, 130, 246, 0.3); box-shadow: 0 0 40px rgba(59, 130, 246, 0.15); margin-bottom: 1.5rem;">
+        <div style="display: inline-flex; gap: 1rem;">
+          <a href="https://linkedin.com/in/jasmelacosta" target="_blank" style="color: var(--text-muted); transition: color 0.3s;" onmouseover="this.style.color='var(--electric)'" onmouseout="this.style.color='var(--text-muted)'">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://twitter.com/jasmelacosta" target="_blank" style="color: var(--text-muted); transition: color 0.3s;" onmouseover="this.style.color='var(--electric)'" onmouseout="this.style.color='var(--text-muted)'">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <div>
+        <span style="display: inline-block; background: rgba(59, 130, 246, 0.1); color: var(--electric); padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Founder</span>
+        <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Jasmel Acosta</h2>
+        <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem;">Developer, Entrepreneur &amp; AI Strategist</p>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+          After 15+ years building tech solutions for healthcare and small businesses, I founded AI Dynamic Pro to bridge the gap between cutting-edge AI and real-world business results. 
+          We don't sell buzzwords — we deploy working systems that cut costs, save time, and scale your operations without adding headcount.
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+          Every automation we build is designed around one question: <strong style="color: var(--text-primary);">"Does this make you money or save you time?"</strong> If the answer isn't yes, we don't build it.
+        </p>
+        
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">50+</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">AI Deployments</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$2M+</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Client Revenue Impact</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">14 Days</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Avg. Deployment Time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section" id="contact">
     <h2>Ready to Automate Your Growth?</h2>
@@ -971,9 +1040,9 @@
       
       sizes[i] = Math.random() * 2 + 0.5;
       velocities.push({
-        x: (Math.random() - 0.5) * 0.02,
-        y: (Math.random() - 0.5) * 0.02,
-        z: (Math.random() - 0.5) * 0.01
+        x: (Math.random() - 0.5) * 0.008,
+        y: (Math.random() - 0.5) * 0.008,
+        z: (Math.random() - 0.5) * 0.004
       });
     }
 
@@ -1020,7 +1089,7 @@
       scene.rotation.y += (mouseX * 0.1 - scene.rotation.y) * 0.02;
       scene.rotation.x += (mouseY * 0.1 - scene.rotation.x) * 0.02;
       
-      particles.rotation.y += 0.0003;
+      particles.rotation.y += 0.0001;
       
       renderer.render(scene, camera);
     }
@@ -1031,6 +1100,50 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    // ── MATRIX DIGITAL RAIN ──
+    const mCanvas = document.getElementById('matrix-canvas');
+    const mCtx = mCanvas.getContext('2d');
+    
+    function resizeMatrix() {
+      mCanvas.width = window.innerWidth;
+      mCanvas.height = window.innerHeight;
+    }
+    resizeMatrix();
+    
+    const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars = (katakana + latin).split('');
+    const fontSize = 14;
+    const columns = Math.floor(mCanvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+    
+    function drawMatrix() {
+      mCtx.fillStyle = 'rgba(10, 14, 26, 0.05)';
+      mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+      
+      mCtx.fillStyle = '#0f0';
+      mCtx.font = fontSize + 'px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        
+        // Randomly vary brightness for trail effect
+        const brightness = Math.random() > 0.95 ? '#fff' : '#0f0';
+        mCtx.fillStyle = brightness;
+        mCtx.fillText(text, x, y);
+        
+        if (y > mCanvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 50);
+    
+    window.addEventListener('resize', resizeMatrix);
 
     // ── GSAP ANIMATIONS ──
     gsap.registerPlugin(ScrollTrigger);
