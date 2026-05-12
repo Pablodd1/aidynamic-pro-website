@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="rocket-styles.css">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -1282,6 +1283,67 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    // ── HYPERREALISTIC ROCKET ──
+    // Replace matrix with rocket launch experience
+    const rocketHTML = `
+      <div class="rocket-container" id="rocket" style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); z-index: 5;">
+        <div class="rocket">
+          <div class="rocket-nose"></div>
+          <div class="rocket-body"></div>
+          <div class="rocket-fin left"></div>
+          <div class="rocket-fin right"></div>
+          <div class="rocket-engine"></div>
+          <div class="rocket-window"></div>
+          <div class="rocket-logo">AI DYNAMIC</div>
+          <div class="exhaust" id="exhaust">
+            <div class="flame-core"></div>
+            <div class="flame-outer"></div>
+            <div class="flame-sparks" id="flameSparks"></div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    // Insert rocket into hero section
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      heroSection.insertAdjacentHTML('beforeend', rocketHTML);
+      
+      // Generate sparks
+      const sparksContainer = document.getElementById('flameSparks');
+      if (sparksContainer) {
+        for (let i = 0; i < 15; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'spark';
+          spark.style.left = Math.random() * 100 + '%';
+          spark.style.bottom = Math.random() * 20 + '%';
+          spark.style.setProperty('--tx', (Math.random() - 0.5) * 60 + 'px');
+          spark.style.animationDelay = Math.random() * 0.5 + 's';
+          spark.style.animationDuration = (0.3 + Math.random() * 0.4) + 's';
+          sparksContainer.appendChild(spark);
+        }
+      }
+      
+      // Animate rocket on scroll
+      ScrollTrigger.create({
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => {
+          const rocket = document.getElementById('rocket');
+          const exhaust = document.getElementById('exhaust');
+          if (rocket) {
+            const progress = self.progress;
+            rocket.style.transform = `translateX(-50%) translateY(-${progress * 200}px) rotate(${progress * 5}deg)`;
+            if (exhaust) {
+              exhaust.style.opacity = progress > 0.2 ? '1' : '0';
+            }
+          }
+        }
+      });
+    }
 
     // ── MATRIX DIGITAL RAIN ──
     const mCanvas = document.getElementById('matrix-canvas');

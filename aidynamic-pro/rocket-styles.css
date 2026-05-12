@@ -1,0 +1,165 @@
+/* ═══════════════════════════════════════════
+   HYPERREALISTIC ROCKET STYLES
+   Add to your existing CSS
+   ═══════════════════════════════════════════ */
+
+/* ── Rocket Container ── */
+.rocket-container {
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0);
+  z-index: 4;
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear;
+}
+
+.rocket {
+  width: 100px;
+  height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+
+/* ── Nose Cone ── */
+.rocket-nose {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 80px;
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.8) 0%, transparent 50%),
+    linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 30%, #a0a0a0 60%, #808080 100%);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), inset 5px 0 10px rgba(255,255,255,0.3);
+}
+
+/* ── Body ── */
+.rocket-body {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 150px;
+  background: 
+    linear-gradient(90deg, 
+      #b0b0b0 0%, 
+      #e0e0e0 15%, 
+      #f5f5f5 30%, 
+      #f0f0f0 50%, 
+      #e8e8e8 70%, 
+      #d0d0d0 85%, 
+      #a0a0a0 100%
+    );
+  border-radius: 2px;
+  box-shadow: 
+    inset -3px 0 8px rgba(0,0,0,0.15),
+    inset 3px 0 8px rgba(255,255,255,0.4),
+    0 0 20px rgba(200,200,255,0.1);
+}
+
+/* ── Fins ── */
+.rocket-fin {
+  position: absolute;
+  bottom: 30px;
+  width: 35px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 40%, #e55a2b 100%);
+  clip-path: polygon(0% 0%, 100% 20%, 100% 100%, 0% 100%);
+  box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
+}
+
+/* ── Engine ── */
+.rocket-engine {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 35px;
+  background: radial-gradient(ellipse at center, #3a3a4e 0%, #2a2a3e 50%, #1a1a2e 100%);
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+  box-shadow: inset 0 -5px 10px rgba(0,0,0,0.5), 0 0 15px rgba(255,100,50,0.2);
+}
+
+/* ── Window ── */
+.rocket-window {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle at 35% 30%, rgba(135,206,235,0.9) 0%, rgba(70,130,180,0.8) 40%, rgba(30,60,100,0.9) 100%);
+  border-radius: 50%;
+  border: 3px solid #b0b0b0;
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.3), 0 0 10px rgba(135,206,235,0.3);
+}
+
+/* ── Exhaust ── */
+.exhaust {
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 120px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.exhaust.active { opacity: 1; }
+
+.flame-core {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 100px;
+  background: linear-gradient(180deg, #ffffff 0%, #fff5e6 10%, #ffeb3b 25%, #ff9800 50%, #ff5722 75%, #d84315 100%);
+  border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+  filter: blur(1px);
+  animation: flicker 0.08s infinite alternate;
+}
+
+.flame-outer {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(255,220,150,0.4) 0%, rgba(255,150,80,0.2) 40%, rgba(255,80,30,0.1) 70%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(12px);
+  animation: flicker 0.12s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scaleY(1) scaleX(1); }
+  25% { transform: translateX(-50%) scaleY(1.08) scaleX(0.95); }
+  50% { transform: translateX(-50%) scaleY(0.95) scaleX(1.02); }
+  75% { transform: translateX(-50%) scaleY(1.05) scaleX(0.98); }
+  100% { transform: translateX(-50%) scaleY(1.02) scaleX(1); }
+}
+
+/* ── Sparks ── */
+.spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  animation: sparkFly 0.5s infinite linear;
+}
+
+@keyframes sparkFly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), -50px) scale(0); opacity: 0; }
+}
