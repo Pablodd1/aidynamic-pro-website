@@ -670,14 +670,17 @@
   <nav class="nav">
     <a href="#" class="nav-logo"><img src="logo-option-1.svg" alt="AI Dynamic Pro" style="height: 40px; width: auto;"></a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#trust">Results</a></li>
-      <li><a href="#founder">About</a></li>
-      <li><a href="#consultation">Contact</a></li>
+      <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a href="#process" data-i18n="nav_process">Process</a></li>
+      <li><a href="#trust" data-i18n="nav_results">Results</a></li>
+      <li><a href="#founder" data-i18n="nav_about">About</a></li>
+      <li><a href="#consultation" data-i18n="nav_contact">Contact</a></li>
     </ul>
-    <a href="#consultation" class="nav-cta">Get Started</a>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <div id="lang-toggle"></div>
+      <a href="#consultation" class="nav-cta" data-i18n="cta_get_started">Get Started</a>
+    </div>
     <button class="mobile-toggle" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -689,29 +692,29 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="pulse"></span>
-          AI Consulting & Automation
+          <span data-i18n="hero_badge">AI Consulting & Automation</span>
         </div>
-        <h1>AI That Works<br>While You Sleep.</h1>
-        <p class="hero-subtitle">
+        <h1 data-i18n="hero_headline">AI That Works<br>While You Sleep.</h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
           We build AI automation systems for small businesses that actually work. 
           No fluff, no jargon — just measurable ROI in 14 days.
         </p>
         <div class="hero-cta-group">
-          <a href="#consultation" class="btn-primary">Book Free Strategy Call →</a>
-          <a href="#services" class="btn-secondary">See How It Works</a>
+          <a href="#consultation" class="btn-primary" data-i18n="hero_cta_primary">Book Free Strategy Call →</a>
+          <a href="#services" class="btn-secondary" data-i18n="hero_cta_secondary">See How It Works</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat">
             <div class="hero-stat-number">14</div>
-            <div class="hero-stat-label">Days to Deploy</div>
+            <div class="hero-stat-label" data-i18n="hero_stat_days">Days to Deploy</div>
           </div>
           <div class="hero-stat">
             <div class="hero-stat-number">40%</div>
-            <div class="hero-stat-label">Avg. Cost Reduction</div>
+            <div class="hero-stat-label" data-i18n="hero_stat_cost">Avg. Cost Reduction</div>
           </div>
           <div class="hero-stat">
             <div class="hero-stat-number">24/7</div>
-            <div class="hero-stat-label">AI Operations</div>
+            <div class="hero-stat-label" data-i18n="hero_stat_ops">AI Operations</div>
           </div>
         </div>
       </div>
@@ -726,9 +729,9 @@
   <!-- Services -->
   <section class="section" id="services">
     <div class="section-header">
-      <span class="section-label">What We Do</span>
-      <h2>AI Solutions That Move the Needle</h2>
-      <p class="section-desc">
+      <span class="section-label" data-i18n="section_services">What We Do</span>
+      <h2 data-i18n="section_services_title">AI Solutions That Move the Needle</h2>
+      <p class="section-desc" data-i18n="section_services_desc">
         Every service designed to reduce costs, save time, and scale your business without adding headcount.
       </p>
     </div>
@@ -769,9 +772,9 @@
   <!-- Process -->
   <section class="section" id="process">
     <div class="section-header">
-      <span class="section-label">Our Process</span>
-      <h2>From Strategy to ROI in 14 Days</h2>
-      <p class="section-desc">
+      <span class="section-label" data-i18n="section_process">Our Process</span>
+      <h2 data-i18n="section_process_title">From Strategy to ROI in 14 Days</h2>
+      <p class="section-desc" data-i18n="section_process_desc">
         A battle-tested framework we've refined across 50+ small business deployments.
       </p>
     </div>
@@ -815,9 +818,9 @@
   <!-- Trust / Results -->
   <section class="section trust-section" id="trust">
     <div class="section-header">
-      <span class="section-label">Proven Results</span>
-      <h2>Real Numbers, Real Impact</h2>
-      <p class="section-desc">
+      <span class="section-label" data-i18n="section_results_label">Proven Results</span>
+      <h2 data-i18n="section_results">Real Numbers, Real Impact</h2>
+      <p class="section-desc" data-i18n="section_results_desc">
         We measure success by the metrics that matter to your bottom line.
       </p>
     </div>
@@ -844,9 +847,9 @@
   <!-- Pricing Tiers -->
   <section class="section" id="pricing">
     <div class="section-header">
-      <span class="section-label">Investment</span>
-      <h2>Transparent Pricing, Real ROI</h2>
-      <p class="section-desc">
+      <span class="section-label" data-i18n="section_pricing_label">Investment</span>
+      <h2 data-i18n="section_pricing">Transparent Pricing, Real ROI</h2>
+      <p class="section-desc" data-i18n="section_pricing_desc">
         No hidden fees. No long-term contracts you can't escape. Just results.
       </p>
     </div>
@@ -968,11 +971,11 @@
 
   <!-- CTA -->
   <section class="cta-section" id="contact">
-    <h2>Ready to Automate Your Growth?</h2>
-    <p>Book a free 30-minute strategy call. We'll audit your current setup and show you exactly where AI can make the biggest impact.</p>
+    <h2 data-i18n="cta_section_title">Ready to Automate Your Growth?</h2>
+    <p data-i18n="cta_section_desc">Book a free 30-minute strategy call. We'll audit your current setup and show you exactly where AI can make the biggest impact.</p>
     <div class="hero-cta-group" style="justify-content: center;">
-      <a href="#consultation-form" class="btn-primary">Book Your Free Call →</a>
-      <a href="mailto:jasmelacosta@gmail.com" class="btn-secondary">Email Us</a>
+      <a href="#calendly-embed" class="btn-primary" data-i18n="cta_book_now">Book Your Free Call →</a>
+      <a href="mailto:jasmelacosta@gmail.com" class="btn-secondary" data-i18n="cta_contact_us">Email Us</a>
     </div>
     <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--text-muted);">
       📞 Prefer to call? <a href="tel:+17866432099" style="color: var(--electric);">+1 (786) 643-2099</a>
@@ -1158,6 +1161,18 @@
         <p style="color: var(--text-secondary); margin-bottom: 2rem;">We'll reach out within 24 hours to schedule your free strategy call. Check your email for confirmation.</p>
         <a href="https://calendar.app.google.com" class="btn-primary" style="display: inline-block;">Or Book Directly on Our Calendar →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Calendly Inline Booking -->
+  <section class="section" id="calendly-embed" style="padding: 4rem 3rem;">
+    <div class="section-header">
+      <span class="section-label" data-i18n="cta_free_consultation">Free Consultation</span>
+      <h2 data-i18n="cta_schedule_call">Schedule a Call</h2>
+      <p class="section-desc" data-i18n="cta_section_desc">Book a free 30-minute strategy call. We'll audit your current setup and show you exactly where AI can make the biggest impact.</p>
+    </div>
+    <div id="calendly-container" style="max-width: 1100px; margin: 0 auto;">
+      <div id="calendly-widget"></div>
     </div>
   </section>
 
@@ -1719,6 +1734,25 @@
     console.log('%c⚠️ STOP!', 'color: red; font-size: 30px; font-weight: bold;');
     console.log('%cThis is a browser feature intended for developers. If someone told you to copy-paste something here, it is a scam.', 'color: #ff6b6b; font-size: 14px;');
     console.log('%c© 2026 AI Dynamic Pro. All rights reserved.', 'color: #64748b; font-size: 12px;');
+  </script>
+  <!-- Shared Language & Calendly Modules -->
+  <script src="../../shared/language-toggle.js"></script>
+  <script src="../../shared/calendly-booking.js"></script>
+  <script>
+    // Initialize language toggle with relative path for translations
+    window.__i18nBasePath = '../../shared/translations/';
+    document.addEventListener('DOMContentLoaded', function() {
+      LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: '../../shared/translations/' });
+      
+      // Initialize Calendly inline embed
+      if (document.getElementById('calendly-widget')) {
+        CalendlyBooking.init({
+          username: 'aidynamicpro',
+          containerId: 'calendly-widget',
+          colors: { primary: '#3b82f6', background: '#0a0e1a', text: '#e2e8f0' }
+        });
+      }
+    });
   </script>
 </body>
 </html>
