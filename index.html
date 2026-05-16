@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dynamics Pro — AI Solutions for Business Growth</title>
+    <meta name="description" content="AI-powered solutions for businesses. Website agents, automation, chatbots, and AI consulting. Transform your business with artificial intelligence.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(to right, #00D4FF, #B829DD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glow-blue { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+    </style>
+    
+    <!-- Agentic Website Engine -->
+    <script src="agentic-config.js"></script>
+    <script src="/agentic-website-engine.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <img src="logo.png" alt="AI Dynamic Pro" class="h-10 w-auto">
+                    <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#services" class="text-gray-300 hover:text-white transition">Services</a>
+                    <a href="#solutions" class="text-gray-300 hover:text-white transition">Solutions</a>
+                    <a href="#contact" class="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-lg text-white font-semibold hover:opacity-90 transition">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00D4FF] text-sm font-medium mb-6">
+                <i class="fas fa-bolt"></i> AI-Powered Business Solutions
+            </span>
+            <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6" id="heroHeadline">
+                Transform Your Business<br><span class="gradient-text">With AI</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+                Website agents, automation workflows, intelligent chatbots, and AI consulting. 
+                We build the future of your business.
+            </p>
+            <div class="flex justify-center gap-4">
+                <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-xl text-white font-semibold hover:opacity-90 transition text-lg glow-blue" data-track="cta-hero">
+                    <i class="fas fa-rocket mr-2"></i>Start Your Project
+                </button>
+                <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" class="px-8 py-4 glass rounded-xl text-white font-semibold hover:bg-white/10 transition text-lg">
+                    <i class="fas fa-play mr-2"></i>See Solutions
+                </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
+                <div class="glass rounded-xl p-6">
+                    <p class="text-3xl font-bold text-[#00D4FF]">150+</p>
+                    <p class="text-gray-400 text-sm">AI Projects Delivered</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <p class="text-3xl font-bold text-[#00D4FF]">98%</p>
+                    <p class="text-gray-400 text-sm">Client Satisfaction</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <p class="text-3xl font-bold text-[#00D4FF]">3x</p>
+                    <p class="text-gray-400 text-sm">Average ROI Increase</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <p class="text-3xl font-bold text-[#00D4FF]">24/7</p>
+                    <p class="text-gray-400 text-sm">AI Agent Uptime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Our AI Solutions</h2>
+                <p class="text-gray-400">Intelligent automation for every business need</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="website-agents">
+                    <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Website Agents</h3>
+                    <p class="text-gray-400">Self-improving websites that track visitors, optimize content, and convert better automatically.</p>
+                </div>
+                
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="automation">
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-cogs text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Process Automation</h3>
+                    <p class="text-gray-400">Automate repetitive tasks, data entry, and workflows. Save 20+ hours per week.</p>
+                </div>
+                
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="chatbots">
+                    <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Intelligent Chatbots</h3>
+                    <p class="text-gray-400">AI chatbots that understand context, answer questions, and book appointments 24/7.</p>
+                </div>
+                
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="consulting">
+                    <div class="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">AI Consulting</h3>
+                    <p class="text-gray-400">Strategic guidance on AI implementation, tool selection, and digital transformation.</p>
+                </div>
+                
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="analytics">
+                    <div class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Predictive Analytics</h3>
+                    <p class="text-gray-400">AI models that predict customer behavior, sales trends, and inventory needs.</p>
+                </div>
+                
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="integration">
+                    <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-plug text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">System Integration</h3>
+                    <p class="text-gray-400">Connect your CRM, ERP, and tools with AI-powered middleware and APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass rounded-2xl p-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-2 text-center">Start Your AI Project</h2>
+                <p class="text-gray-400 text-center mb-8">Free consultation and project estimate</p>
+                
+                <form id="projectForm" class="space-y-4" data-track="form-project">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Your Name" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]">
+                        <input type="email" placeholder="Email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]">
+                    </div>
+                    <input type="text" placeholder="Company Name" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]">
+                    <select class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]">
+                        <option value="" class="bg-gray-900">Project Type</option>
+                        <option value="website-agent" class="bg-gray-900">Website Agent</option>
+                        <option value="automation" class="bg-gray-900">Process Automation</option>
+                        <option value="chatbot" class="bg-gray-900">Chatbot</option>
+                        <option value="consulting" class="bg-gray-900">AI Consulting</option>
+                        <option value="analytics" class="bg-gray-900">Predictive Analytics</option>
+                        <option value="other" class="bg-gray-900">Other</option>
+                    </select>
+                    <textarea placeholder="Tell us about your project..." rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]"></textarea>
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-xl text-white font-semibold hover:opacity-90 transition" data-track="cta-form-submit">
+                        <i class="fas fa-paper-plane mr-2"></i>Get Free Estimate
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00D4FF] to-[#B829DD] flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Building intelligent solutions for businesses since 2020.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-[#00D4FF] transition">Website Agents</a></li>
+                        <li><a href="#" class="hover:text-[#00D4FF] transition">Automation</a></li>
+                        <li><a href="#" class="hover:text-[#00D4FF] transition">Chatbots</a></li>
+                        <li><a href="#" class="hover:text-[#00D4FF] transition">Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><i class="fas fa-envelope mr-2"></i>hello@aidynamic.pro</li>
+                        <li><i class="fas fa-globe mr-2"></i>aidynamic.pro</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2026 AI Dynamics Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you within 24 hours with your free project estimate.');
+        });
+    </script>
+</body>
+</html>
