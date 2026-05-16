@@ -48,6 +48,8 @@
   // ── Apply translations to DOM ────────────────────────────────────
   function applyTranslations(data) {
     if (!data) return;
+    
+    // Handle data-i18n elements
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (!key || !data[key]) return;
@@ -59,6 +61,8 @@
         }
       } else if (el.tagName === 'META') {
         el.setAttribute('content', value);
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = value;
       } else {
         // Support nested HTML in translations (use with caution)
         if (value.includes('<') && value.includes('>')) {
@@ -67,6 +71,13 @@
           el.textContent = value;
         }
       }
+    });
+
+    // Handle data-i18n-placeholder elements (for inputs/textarea placeholders)
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (!key || !data[key]) return;
+      el.setAttribute('placeholder', data[key]);
     });
 
     // Update document title if translated

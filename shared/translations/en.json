@@ -14,7 +14,6 @@
   "nav_search": "SEARCH",
   "nav_listings": "LISTINGS",
   "nav_match": "AI MATCH",
-
   "hero_badge": "AI-Powered Automation",
   "hero_headline": "Transform Your Business with AI",
   "hero_subtitle": "14-day deployment. Transparent pricing. Real ROI. We build custom AI systems that actually work for your business.",
@@ -23,7 +22,6 @@
   "hero_stat_days": "Days to Deploy",
   "hero_stat_cost": "Avg. Cost Reduction",
   "hero_stat_ops": "AI Operations",
-
   "cta_book_now": "Book Now",
   "cta_free_consultation": "Free Consultation",
   "cta_contact_us": "Contact Us",
@@ -33,7 +31,6 @@
   "cta_chat_now": "Chat Now",
   "cta_section_title": "Ready to Automate Your Growth?",
   "cta_section_desc": "Book a free 30-minute strategy call. We'll audit your current setup and show you exactly where AI can make the biggest impact.",
-
   "section_services": "What We Do",
   "section_services_title": "AI Solutions That Move the Needle",
   "section_services_desc": "Every service designed to reduce costs, save time, and scale your business without adding headcount.",
@@ -51,21 +48,18 @@
   "section_faq": "Frequently Asked Questions",
   "section_contact": "Get In Touch",
   "section_testimonials": "What Clients Say",
-
   "service_ai_consulting": "AI Consulting",
   "service_automation": "Business Automation",
   "service_chatbots": "AI Chatbots",
   "service_integration": "System Integration",
   "service_training": "Team Training",
   "service_support": "Ongoing Support",
-
   "pricing_starter": "Starter",
   "pricing_professional": "Professional",
   "pricing_enterprise": "Enterprise",
   "pricing_popular": "Most Popular",
   "pricing_per_month": "/month",
   "pricing_contact_us": "Contact us for pricing",
-
   "form_name": "Your Name",
   "form_email": "Email",
   "form_phone": "Phone",
@@ -76,7 +70,6 @@
   "form_placeholder_email": "Enter your email",
   "form_placeholder_phone": "Enter your phone number",
   "form_placeholder_message": "Tell us about your project...",
-
   "footer_services": "Services",
   "footer_company": "Company",
   "footer_legal": "Legal",
@@ -86,11 +79,9 @@
   "footer_terms": "Terms of Service",
   "footer_cookies": "Cookie Policy",
   "footer_rights": "All rights reserved.",
-
   "contact_email": "Email",
   "contact_phone": "Phone",
   "contact_address": "Address",
-
   "mbmb_hero_headline": "Stop Losing Revenue to Billing Errors",
   "mbmb_hero_badge": "Trusted by 50+ Miami Physicians",
   "mbmb_hero_subtitle": "Medical billing services for Miami practices. Free revenue audit. You only pay when we collect.",
@@ -148,7 +139,6 @@
   "mbmb_footer_contact": "Contact",
   "mbmb_footer_legal": "Legal",
   "mbmb_footer_hipaa": "HIPAA Compliance",
-
   "305_hero_headline": "Miami Business Marketplace",
   "305_hero_subtitle": "Buy, sell, and connect with Miami businesses. From startups to established companies.",
   "305_cta_browse": "Browse Listings",
@@ -159,9 +149,34 @@
   "305_step_1": "List or Search",
   "305_step_2": "Connect",
   "305_step_3": "Close the Deal",
-
   "lang_en": "English",
   "lang_es": "Spanish",
   "lang_ht": "Haitian Creole",
-  "toggle_language": "Language"
+  "toggle_language": "Language",
+  "hero_stat_projects": "AI Projects Delivered",
+  "hero_stat_satisfaction": "Client Satisfaction",
+  "hero_stat_roi": "Average ROI Increase",
+  "hero_stat_uptime": "AI Agent Uptime",
+  "service_website_agents_desc": "Self-improving websites that track visitors, optimize content, and convert better automatically.",
+  "service_automation_desc": "Automate repetitive tasks, data entry, and workflows. Save 20+ hours per week.",
+  "service_chatbots_desc": "AI chatbots that understand context, answer questions, and book appointments 24/7.",
+  "service_consulting": "AI Consulting",
+  "service_consulting_desc": "Strategic guidance on AI implementation, tool selection, and digital transformation.",
+  "service_analytics": "Predictive Analytics",
+  "service_analytics_desc": "AI models that predict customer behavior, sales trends, and inventory needs.",
+  "service_integration_desc": "Connect your CRM, ERP, and tools with AI-powered middleware and APIs.",
+  "section_contact_title": "Start Your AI Project",
+  "section_contact_desc": "Free consultation and project estimate",
+  "form_project_type": "Project Type",
+  "form_type_website": "Website Agent",
+  "form_type_automation": "Process Automation",
+  "form_type_chatbot": "Chatbot",
+  "form_type_consulting": "AI Consulting",
+  "form_type_analytics": "Predictive Analytics",
+  "form_type_other": "Other",
+  "footer_contact": "Contact",
+  "footer_link_website_agents": "Website Agents",
+  "footer_link_automation": "Automation",
+  "footer_link_chatbots": "Chatbots",
+  "footer_link_consulting": "Consulting"
 }

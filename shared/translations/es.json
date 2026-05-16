@@ -14,7 +14,6 @@
   "nav_search": "BUSCAR",
   "nav_listings": "LISTADOS",
   "nav_match": "MATCH IA",
-
   "hero_badge": "Automatización con IA",
   "hero_headline": "Transforme Su Negocio con IA",
   "hero_subtitle": "Despliegue en 14 días. Precios transparentes. ROI real. Construimos sistemas de IA personalizados que realmente funcionan para su negocio.",
@@ -23,7 +22,6 @@
   "hero_stat_days": "Días para Desplegar",
   "hero_stat_cost": "Reducción Promedio de Costos",
   "hero_stat_ops": "Operaciones IA",
-
   "cta_book_now": "Reserve Ahora",
   "cta_free_consultation": "Consulta Gratis",
   "cta_contact_us": "Contáctenos",
@@ -33,7 +31,6 @@
   "cta_chat_now": "Chatee Ahora",
   "cta_section_title": "¿Listo para Automatizar su Crecimiento?",
   "cta_section_desc": "Reserve una llamada de estrategia gratuita de 30 minutos. Auditaremos su configuración actual y le mostraremos exactamente dónde la IA puede tener el mayor impacto.",
-
   "section_services": "Qué Hacemos",
   "section_services_title": "Soluciones de IA que Marcan la Diferencia",
   "section_services_desc": "Cada servicio diseñado para reducir costos, ahorrar tiempo y escalar su negocio sin aumentar personal.",
@@ -51,21 +48,18 @@
   "section_faq": "Preguntas Frecuentes",
   "section_contact": "Póngase en Contacto",
   "section_testimonials": "Lo Que Dicen Nuestros Clientes",
-
   "service_ai_consulting": "Consultoría de IA",
   "service_automation": "Automatización Empresarial",
   "service_chatbots": "Chatbots con IA",
   "service_integration": "Integración de Sistemas",
   "service_training": "Capacitación de Equipo",
   "service_support": "Soporte Continuo",
-
   "pricing_starter": "Inicial",
   "pricing_professional": "Profesional",
   "pricing_enterprise": "Empresarial",
   "pricing_popular": "Más Popular",
   "pricing_per_month": "/mes",
   "pricing_contact_us": "Contáctenos para precios",
-
   "form_name": "Su Nombre",
   "form_email": "Correo Electrónico",
   "form_phone": "Teléfono",
@@ -76,7 +70,6 @@
   "form_placeholder_email": "Ingrese su correo",
   "form_placeholder_phone": "Ingrese su teléfono",
   "form_placeholder_message": "Cuéntenos sobre su proyecto...",
-
   "footer_services": "Servicios",
   "footer_company": "Empresa",
   "footer_legal": "Legal",
@@ -86,11 +79,9 @@
   "footer_terms": "Términos de Servicio",
   "footer_cookies": "Política de Cookies",
   "footer_rights": "Todos los derechos reservados.",
-
   "contact_email": "Correo",
   "contact_phone": "Teléfono",
   "contact_address": "Dirección",
-
   "mbmb_hero_headline": "Deje de Perder Ingresos por Errores de Facturación",
   "mbmb_hero_badge": "Confiado por 50+ Médicos de Miami",
   "mbmb_hero_subtitle": "Servicios de facturación médica para prácticas de Miami. Auditoría de ingresos gratis. Solo paga cuando cobramos.",
@@ -148,7 +139,6 @@
   "mbmb_footer_contact": "Contacto",
   "mbmb_footer_legal": "Legal",
   "mbmb_footer_hipaa": "Cumplimiento HIPAA",
-
   "305_hero_headline": "Mercado de Negocios de Miami",
   "305_hero_subtitle": "Compre, venda y conecte con negocios de Miami. Desde startups hasta empresas establecidas.",
   "305_cta_browse": "Explorar Listados",
@@ -159,9 +149,34 @@
   "305_step_1": "Publique o Busque",
   "305_step_2": "Conecte",
   "305_step_3": "Cierre el Trato",
-
   "lang_en": "Inglés",
   "lang_es": "Español",
   "lang_ht": "Criollo Haitiano",
-  "toggle_language": "Idioma"
+  "toggle_language": "Idioma",
+  "hero_stat_projects": "Proyectos de IA Entregados",
+  "hero_stat_satisfaction": "Satisfacción del Cliente",
+  "hero_stat_roi": "Aumento Promedio de ROI",
+  "hero_stat_uptime": "Tiempo de Actividad del Agente IA",
+  "service_website_agents_desc": "Sitios web auto-mejorables que rastrean visitantes, optimizan contenido y convierten mejor automáticamente.",
+  "service_automation_desc": "Automatice tareas repetitivas, entrada de datos y flujos de trabajo. Ahorre 20+ horas por semana.",
+  "service_chatbots_desc": "Chatbots de IA que entienden contexto, responden preguntas y agendan citas 24/7.",
+  "service_consulting": "Consultoría de IA",
+  "service_consulting_desc": "Orientación estratégica en implementación de IA, selección de herramientas y transformación digital.",
+  "service_analytics": "Analítica Predictiva",
+  "service_analytics_desc": "Modelos de IA que predicen comportamiento del cliente, tendencias de ventas y necesidades de inventario.",
+  "service_integration_desc": "Conecte su CRM, ERP y herramientas con middleware y APIs potenciados por IA.",
+  "section_contact_title": "Inicie Su Proyecto de IA",
+  "section_contact_desc": "Consulta gratuita y estimación de proyecto",
+  "form_project_type": "Tipo de Proyecto",
+  "form_type_website": "Agente Web",
+  "form_type_automation": "Automatización de Procesos",
+  "form_type_chatbot": "Chatbot",
+  "form_type_consulting": "Consultoría de IA",
+  "form_type_analytics": "Analítica Predictiva",
+  "form_type_other": "Otro",
+  "footer_contact": "Contacto",
+  "footer_link_website_agents": "Agentes Web",
+  "footer_link_automation": "Automatización",
+  "footer_link_chatbots": "Chatbots",
+  "footer_link_consulting": "Consultoría"
 }
