@@ -29,9 +29,10 @@
                     <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="#services" class="text-gray-300 hover:text-white transition">Services</a>
-                    <a href="#solutions" class="text-gray-300 hover:text-white transition">Solutions</a>
-                    <a href="#contact" class="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-lg text-white font-semibold hover:opacity-90 transition">
+                    <a href="#services" class="text-gray-300 hover:text-white transition" data-i18n="nav_services">Services</a>
+                    <a href="#solutions" class="text-gray-300 hover:text-white transition" data-i18n="nav_solutions">Solutions</a>
+                    <div id="lang-toggle" class="relative"></div>
+                    <a href="#contact" class="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-lg text-white font-semibold hover:opacity-90 transition" data-i18n="cta_get_started">
                         Get Started
                     </a>
                 </div>
@@ -222,6 +223,22 @@
             e.preventDefault();
             alert('Thank you! We will contact you within 24 hours with your free project estimate.');
         });
+    </script>
+    <!-- Shared Language & Calendly Modules -->
+    <script src="shared/language-toggle.js"></script>
+    <script src="shared/calendly-booking.js"></script>
+    <script>
+      window.__i18nBasePath = 'shared/translations/';
+      document.addEventListener('DOMContentLoaded', function() {
+        LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
+        if (document.getElementById('calendly-widget')) {
+          CalendlyBooking.init({
+            username: 'aidynamicpro',
+            containerId: 'calendly-widget',
+            colors: { primary: '#00D4FF', background: '#0a0a0f', text: '#e0e0e0' }
+          });
+        }
+      });
     </script>
 </body>
 </html>
