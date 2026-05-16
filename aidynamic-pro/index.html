@@ -1736,13 +1736,13 @@
     console.log('%c© 2026 AI Dynamic Pro. All rights reserved.', 'color: #64748b; font-size: 12px;');
   </script>
   <!-- Shared Language & Calendly Modules -->
-  <script src="shared/language-toggle.js"></script>
-  <script src="shared/calendly-booking.js"></script>
+  <script src="/shared/language-toggle.js"></script>
+  <script src="/shared/calendly-booking.js"></script>
   <script>
     // Initialize language toggle with relative path for translations
-    window.__i18nBasePath = 'shared/translations/';
+    window.__i18nBasePath = '/shared/translations/';
     document.addEventListener('DOMContentLoaded', function() {
-      LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
+      LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: '/shared/translations/' });
       
       // Initialize Calendly inline embed
       if (document.getElementById('calendly-widget')) {
