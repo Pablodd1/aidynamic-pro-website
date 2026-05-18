@@ -1,319 +1,1138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Dynamics Pro — AI Solutions for Business Growth</title>
-    <meta name="description" content="AI-powered solutions for businesses. Website agents, automation, chatbots, and AI consulting. Transform your business with artificial intelligence.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; }
-        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-text { background: linear-gradient(to right, #00D4FF, #B829DD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glow-blue { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Dynamic Pro — AI Automation for Small Business</title>
+  <meta name="description" content="AI automation that works while you sleep. 14-day deployment. Book your free strategy call.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6JSWT8YWN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K6JSWT8YWN');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="logo-option-1.svg">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     
-    <!-- Agentic Website Engine -->
-    <script src="agentic-config.js"></script>
-    <script src="/agentic-website-engine.js"></script>
+    :root {
+      --midnight: #0a0e1a;
+      --deep-blue: #0f1729;
+      --electric: #3b82f6;
+      --electric-glow: rgba(59, 130, 246, 0.4);
+      --cyan: #06b6d4;
+      --soft-white: #f8fafc;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--midnight);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+    /* ── SPLASH ── */
+    #splash {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--midnight);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .splash-loader { width: 120px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+    .splash-loader-bar { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--accent-gradient); border-radius: 2px; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 14, 26, 0.6);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled { background: rgba(10, 14, 26, 0.95); padding: 0.7rem 2rem; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--electric); }
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      background: var(--accent-gradient);
+      border: none; border-radius: 50px;
+      color: white; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-block;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 40px var(--electric-glow); }
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+    .mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 7rem 2rem 4rem; z-index: 1; overflow: hidden;
+    }
+    .hero-content { max-width: 700px; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--electric); border-radius: 50px;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 1.5rem;
+    }
+    .hero-badge .pulse {
+      width: 6px; height: 6px; background: var(--electric);
+      border-radius: 50%; animation: pulse-glow 2s infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--electric); }
+      50% { opacity: 0.5; box-shadow: 0 0 2px var(--electric); }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1; margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 50%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-secondary); max-width: 500px;
+      margin: 0 auto 2rem; font-weight: 400; line-height: 1.6;
+    }
+    .hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.9rem 2rem; background: var(--accent-gradient);
+      border: none; border-radius: 50px; color: white;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.05em; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4); }
+    .btn-secondary {
+      padding: 0.9rem 2rem; background: transparent;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+      color: var(--text-primary); font-weight: 600;
+      font-size: 0.85rem; letter-spacing: 0.05em;
+      cursor: pointer; transition: all 0.3s;
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); transform: translateY(-3px); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; justify-content: center;
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--electric); line-height: 1;
+    }
+    .hero-stat-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; z-index: 1; padding: 5rem 2rem; }
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+    .section-label {
+      display: inline-block; padding: 0.3rem 0.8rem;
+      border: 1px solid var(--electric); border-radius: 50px;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem; max-width: 900px; margin: 0 auto;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(59, 130, 246, 0.08);
+      border-radius: 16px; padding: 2rem; cursor: pointer;
+      transition: all 0.4s ease; position: relative; overflow: hidden;
+    }
+    .service-card:hover { border-color: rgba(59, 130, 246, 0.2); transform: translateY(-5px); background: rgba(255,255,255,0.03); }
+    .service-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15)); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.3rem; }
+    .service-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+    .service-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
+    .service-card .learn-more { color: var(--electric); font-size: 0.8rem; font-weight: 600; margin-top: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem; transition: gap 0.3s; }
+    .service-card:hover .learn-more { gap: 0.6rem; }
+
+    /* ── TABS ── */
+    .tabs-container { max-width: 800px; margin: 0 auto; }
+    .tabs-nav { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .tab-btn {
+      padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 50px;
+      color: var(--text-secondary); font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; transition: all 0.3s;
+    }
+    .tab-btn:hover { border-color: rgba(59, 130, 246, 0.3); color: var(--text-primary); }
+    .tab-btn.active { background: var(--accent-gradient); border-color: transparent; color: white; }
+    .tab-panel { display: none; animation: fadeIn 0.4s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .tab-content-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px; padding: 2rem;
+    }
+    .tab-content-card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary); }
+    .tab-content-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .tab-content-card ul { list-style: none; }
+    .tab-content-card li { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.6rem; color: var(--text-secondary); font-size: 0.85rem; }
+    .tab-content-card li::before { content: '→'; color: var(--electric); font-weight: 600; }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px; padding: 2rem; position: relative; transition: all 0.4s;
+    }
+    .pricing-card:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-5px); }
+    .pricing-card.popular { border: 2px solid rgba(59, 130, 246, 0.3); }
+    .popular-badge {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      background: var(--accent-gradient); color: white;
+      padding: 0.3rem 1rem; border-radius: 100px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; white-space: nowrap;
+    }
+    .pricing-card .duration {
+      display: inline-block; background: rgba(59, 130, 246, 0.15);
+      color: var(--electric); padding: 0.3rem 0.8rem;
+      border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .pricing-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .pricing-card .price {
+      font-size: 2rem; font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-card .price-note { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1.5rem; }
+    .pricing-card ul { list-style: none; margin-bottom: 1.5rem; }
+    .pricing-card li { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.8rem; }
+    .pricing-card li::before { content: '✓'; color: var(--electric); font-weight: 600; }
+    .pricing-card .btn { width: 100%; text-align: center; display: block; padding: 0.8rem; font-size: 0.8rem; }
+
+    /* ── APPOINTMENTS ── */
+    .appointments-section { background: rgba(255,255,255,0.01); }
+    .appointments-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; max-width: 1000px; margin: 0 auto;
+      align-items: start;
+    }
+    .calendar-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px; padding: 2rem;
+    }
+    .calendar-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .calendar-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .booking-form input, .booking-form select, .booking-form textarea {
+      width: 100%; padding: 0.8rem 1rem; margin-bottom: 0.8rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 12px; color: var(--text-primary); font-size: 0.85rem;
+      font-family: 'Inter', sans-serif; transition: border-color 0.3s;
+    }
+    .booking-form input:focus, .booking-form select:focus, .booking-form textarea:focus {
+      outline: none; border-color: var(--electric);
+    }
+    .booking-form input::placeholder { color: var(--text-muted); }
+    .booking-form button { width: 100%; margin-top: 0.5rem; }
+    .booking-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .time-slots { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .time-slot {
+      padding: 0.5rem 1rem; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 10px;
+      color: var(--text-secondary); font-size: 0.8rem;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .time-slot:hover { border-color: var(--electric); color: var(--electric); }
+    .time-slot.selected { background: var(--accent-gradient); border-color: transparent; color: white; }
+    .time-slot.booked { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── CHATBOT WIDGET ── */
+    .chatbot-widget {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+      display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .chatbot-toggle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--accent-gradient);
+      border: none; color: white; font-size: 1.5rem;
+      cursor: pointer; box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+      transition: all 0.3s; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .chatbot-toggle:hover { transform: scale(1.1); }
+    .chatbot-panel {
+      width: 360px; max-height: 500px;
+      background: var(--deep-blue); border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px; margin-bottom: 1rem;
+      display: flex; flex-direction: column;
+      overflow: hidden; transition: all 0.4s ease;
+      transform-origin: bottom right;
+    }
+    .chatbot-panel.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+    .chatbot-header {
+      padding: 1rem 1.5rem; background: rgba(59, 130, 246, 0.1);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .chatbot-header h4 { font-size: 0.9rem; }
+    .chatbot-header .status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-muted); }
+    .chatbot-header .status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
+    .chatbot-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .chat-message { max-width: 80%; padding: 0.8rem 1rem; border-radius: 16px; font-size: 0.85rem; line-height: 1.5; }
+    .chat-message.bot { background: rgba(59, 130, 246, 0.1); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .chat-message.user { background: var(--accent-gradient); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chatbot-input-area {
+      padding: 1rem; border-top: 1px solid rgba(59, 130, 246, 0.1);
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    .chatbot-input-area input {
+      flex: 1; padding: 0.7rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 50px; color: var(--text-primary);
+      font-size: 0.85rem; outline: none;
+    }
+    .chatbot-input-area input:focus { border-color: var(--electric); }
+    .chatbot-input-area button {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent-gradient); border: none;
+      color: white; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .chatbot-input-area button:hover { transform: scale(1.1); }
+    .voice-btn { background: rgba(255,255,255,0.1) !important; }
+    .voice-btn.recording { background: #ef4444 !important; animation: pulse-rec 1s infinite; }
+    @keyframes pulse-rec { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .typing-indicator { display: flex; gap: 0.3rem; padding: 0.8rem 1rem; }
+    .typing-indicator span { width: 6px; height: 6px; background: var(--electric); border-radius: 50%; animation: typing 1.4s infinite; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid rgba(59, 130, 246, 0.08);
+      padding: 3rem 2rem 2rem; text-align: center;
+      color: var(--text-muted); font-size: 0.8rem;
+    }
+    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; display: inline-block; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; list-style: none; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--electric); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0.8rem 1rem; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: flex; }
+      .hero { padding: 6rem 1rem 3rem; }
+      .hero-stats { gap: 1.5rem; }
+      .section { padding: 3rem 1rem; }
+      .appointments-grid { grid-template-columns: 1fr; }
+      .chatbot-panel { width: calc(100vw - 2rem); right: 1rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .tabs-nav { gap: 0.3rem; }
+      .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
+      .booking-form .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 3px; }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="glass fixed top-0 left-0 right-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-2">
-                    <img src="logo.png" alt="AI Dynamic Pro" class="h-10 w-auto">
-                    <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="#services" class="text-gray-300 hover:text-white transition" data-i18n="nav_services">Services</a>
-                    <a href="#solutions" class="text-gray-300 hover:text-white transition" data-i18n="nav_solutions">Solutions</a>
-                    <a href="founders.html" class="text-gray-300 hover:text-white transition">Founders</a>
-                    <div id="lang-toggle" class="relative"></div>
-                    <a href="#contact" class="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-lg text-white font-semibold hover:opacity-90 transition" data-i18n="cta_get_started">
-                        Get Started
-                    </a>
-                </div>
-            </div>
+
+  <!-- Splash -->
+  <div id="splash">
+    <img src="logo-option-1.svg" alt="AI Dynamic Pro" style="width: 160px; margin-bottom: 2rem;">
+    <div class="splash-loader"><div class="splash-loader-bar"></div></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav-logo"><img src="logo-option-1.svg" alt="AI Dynamic Pro"></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#appointments">Book</a></li>
+      <li><a href="founders.html">Founders</a></li>
+    </ul>
+    <a href="#appointments" class="nav-cta">Book Call</a>
+    <button class="mobile-toggle" onclick="toggleMobileMenu()"><span></span><span></span><span></button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(10,14,26,0.98);padding:6rem 2rem 2rem;">
+    <button onclick="toggleMobileMenu()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">✕</button>
+    <div style="display:flex;flex-direction:column;gap:2rem;align-items:center;">
+      <a href="#services" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Services</a>
+      <a href="#pricing" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Pricing</a>
+      <a href="#appointments" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Book Call</a>
+      <a href="founders.html" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Founders</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="pulse"></span>AI Automation Experts</div>
+      <h1>AI That Works<br>While You Sleep</h1>
+      <p class="hero-subtitle">Custom automation for small businesses. Deployed in 14 days. Measurable ROI from day one.</p>
+      <div class="hero-cta-group">
+        <a href="#appointments" class="btn-primary">Book Free Strategy Call →</a>
+        <a href="#services" class="btn-secondary">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-number">14</div><div class="hero-stat-label">Days to Deploy</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">40%</div><div class="hero-stat-label">Cost Reduction</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">24/7</div><div class="hero-stat-label">AI Operations</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="section-header">
+      <span class="section-label">What We Do</span>
+      <h2>AI Solutions That Scale</h2>
+      <p class="section-desc">Click any service to learn more. We keep it simple — no jargon, just results.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" onclick="openTab('chatbots')">
+        <div class="service-icon">💬</div>
+        <h3>AI Customer Service</h3>
+        <p>24/7 chatbots & voice agents that handle inquiries, qualify leads, and book appointments.</p>
+        <span class="learn-more">Learn more →</span>
+      </div>
+      <div class="service-card" onclick="openTab('automation')">
+        <div class="service-icon">⚡</div>
+        <h3>Process Automation</h3>
+        <p>Automate repetitive workflows — data entry, reporting, invoicing, follow-ups.</p>
+        <span class="learn-more">Learn more →</span>
+      </div>
+      <div class="service-card" onclick="openTab('leads')">
+        <div class="service-icon">🎯</div>
+        <h3>Lead Generation</h3>
+        <p>AI-powered outreach, nurturing, and scoring. Find hot prospects before competitors.</p>
+        <span class="learn-more">Learn more →</span>
+      </div>
+      <div class="service-card" onclick="openTab('scheduling')">
+        <div class="service-icon">📅</div>
+        <h3>Smart Scheduling</h3>
+        <p>Self-booking systems with AI availability. Reduce no-shows by 60%.</p>
+        <span class="learn-more">Learn more →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Tabs -->
+  <section class="section" id="details" style="background:rgba(255,255,255,0.01);">
+    <div class="section-header">
+      <span class="section-label">Details</span>
+      <h2>Explore the Details</h2>
+      <p class="section-desc">Deep dives into each service. Click a tab to expand.</p>
+    </div>
+    <div class="tabs-container">
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="openTab('chatbots')">Chatbots</button>
+        <button class="tab-btn" onclick="openTab('automation')">Automation</button>
+        <button class="tab-btn" onclick="openTab('leads')">Lead Gen</button>
+        <button class="tab-btn" onclick="openTab('scheduling')">Scheduling</button>
+        <button class="tab-btn" onclick="openTab('analytics')">Analytics</button>
+      </div>
+      
+      <div id="tab-chatbots" class="tab-panel active">
+        <div class="tab-content-card">
+          <h3>🤖 AI Customer Service</h3>
+          <p>Intelligent agents that never sleep. Handle inquiries, qualify leads, and book appointments automatically.</p>
+          <ul>
+            <li>Multi-channel support (web, SMS, WhatsApp, voice)</li>
+            <li>Natural language understanding with context memory</li>
+            <li>Seamless handoff to human agents when needed</li>
+            <li>Multilingual support (EN, ES, HT, + more)</li>
+            <li>CRM integration — updates contact records automatically</li>
+            <li>Analytics dashboard — track conversations, satisfaction, conversion</li>
+          </ul>
+          <p><strong style="color:var(--text-primary);">Typical ROI:</strong> 60% reduction in response time, 40% cost savings on support staff.</p>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00D4FF] text-sm font-medium mb-6" data-i18n="hero_badge">
-                <i class="fas fa-bolt"></i> AI-Powered Business Solutions
-            </span>
-            <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6" id="heroHeadline" data-i18n="hero_headline">
-                Transform Your Business<br><span class="gradient-text">With AI</span>
-            </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8" data-i18n="hero_subtitle">
-                Website agents, automation workflows, intelligent chatbots, and AI consulting. 
-                We build the future of your business.
-            </p>
-            <div class="flex justify-center gap-4">
-                <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-xl text-white font-semibold hover:opacity-90 transition text-lg glow-blue" data-track="cta-hero" data-i18n="hero_cta_primary">
-                    <i class="fas fa-rocket mr-2"></i>Start Your Project
-                </button>
-                <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" class="px-8 py-4 glass rounded-xl text-white font-semibold hover:bg-white/10 transition text-lg" data-i18n="hero_cta_secondary">
-                    <i class="fas fa-play mr-2"></i>See Solutions
-                </button>
-            </div>
-            
-            <!-- Stats -->
-            <div class="grid md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-                <div class="glass rounded-xl p-6">
-                    <p class="text-3xl font-bold text-[#00D4FF]">150+</p>
-                    <p class="text-gray-400 text-sm" data-i18n="hero_stat_projects">AI Projects Delivered</p>
-                </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-3xl font-bold text-[#00D4FF]">98%</p>
-                    <p class="text-gray-400 text-sm" data-i18n="hero_stat_satisfaction">Client Satisfaction</p>
-                </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-3xl font-bold text-[#00D4FF]">3x</p>
-                    <p class="text-gray-400 text-sm" data-i18n="hero_stat_roi">Average ROI Increase</p>
-                </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-3xl font-bold text-[#00D4FF]">24/7</p>
-                    <p class="text-gray-400 text-sm" data-i18n="hero_stat_uptime">AI Agent Uptime</p>
-                </div>
-            </div>
+      </div>
+      
+      <div id="tab-automation" class="tab-panel">
+        <div class="tab-content-card">
+          <h3>⚡ Process Automation</h3>
+          <p>Eliminate repetitive tasks. What used to take hours now happens in seconds — automatically, accurately, 24/7.</p>
+          <ul>
+            <li>Workflow automation (Zapier, Make, n8n, custom)</li>
+            <li>Document processing — extract data from PDFs, forms, emails</li>
+            <li>Invoice generation and payment processing</li>
+            <li>Report creation and distribution</li>
+            <li>Data synchronization across platforms</li>
+            <li>Approval workflows with smart routing</li>
+          </ul>
+          <p><strong style="color:var(--text-primary);">Typical ROI:</strong> 10+ hours saved per week per employee.</p>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white mb-4" data-i18n="section_services_title">Our AI Solutions</h2>
-                <p class="text-gray-400" data-i18n="section_services_desc">Intelligent automation for every business need</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="website-agents">
-                    <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-globe text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_website_agents">Website Agents</h3>
-                    <p class="text-gray-400" data-i18n="service_website_agents_desc">Self-improving websites that track visitors, optimize content, and convert better automatically.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="automation">
-                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-cogs text-purple-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_automation">Process Automation</h3>
-                    <p class="text-gray-400" data-i18n="service_automation_desc">Automate repetitive tasks, data entry, and workflows. Save 20+ hours per week.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="chatbots">
-                    <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-comments text-green-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_chatbots">Intelligent Chatbots</h3>
-                    <p class="text-gray-400" data-i18n="service_chatbots_desc">AI chatbots that understand context, answer questions, and book appointments 24/7.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="consulting">
-                    <div class="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-brain text-yellow-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_consulting">AI Consulting</h3>
-                    <p class="text-gray-400" data-i18n="service_consulting_desc">Strategic guidance on AI implementation, tool selection, and digital transformation.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="analytics">
-                    <div class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-chart-line text-red-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_analytics">Predictive Analytics</h3>
-                    <p class="text-gray-400" data-i18n="service_analytics_desc">AI models that predict customer behavior, sales trends, and inventory needs.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition cursor-pointer" data-track="service-card" data-service="integration">
-                    <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-plug text-cyan-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="service_integration">System Integration</h3>
-                    <p class="text-gray-400" data-i18n="service_integration_desc">Connect your CRM, ERP, and tools with AI-powered middleware and APIs.</p>
-                </div>
-            </div>
+      </div>
+      
+      <div id="tab-leads" class="tab-panel">
+        <div class="tab-content-card">
+          <h3>🎯 Lead Generation</h3>
+          <p>AI-powered systems that identify, engage, and convert prospects — while you focus on closing deals.</p>
+          <ul>
+            <li>Automated outreach across LinkedIn, email, SMS</li>
+            <li>Lead scoring based on behavior and fit</li>
+            <li>Personalized nurturing sequences</li>
+            <li>Meeting booking automation</li>
+            <li>Pipeline visibility and forecasting</li>
+            <li>A/B testing for message optimization</li>
+          </ul>
+          <p><strong style="color:var(--text-primary);">Typical ROI:</strong> 3x increase in qualified leads per month.</p>
         </div>
-    </section>
-
-    <section id="solutions" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00D4FF] text-sm font-medium mb-4">
-                    <i class="fas fa-layer-group"></i> Solutions
-                </span>
-                <h2 class="text-4xl lg:text-5xl font-bold text-white mb-4">AI Solutions for <span class="gradient-text">Every Business</span></h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">From startups to enterprises, we build AI systems that scale with your growth.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Solution 1 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-hospital text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Healthcare</h3>
-                    <p class="text-gray-400 mb-4">AI scribes, patient scheduling bots, and revenue cycle automation for medical practices.</p>
-                    <a href="chatbots.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-
-                <!-- Solution 2 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-shopping-cart text-purple-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">E-commerce</h3>
-                    <p class="text-gray-400 mb-4">Product recommendation engines, inventory forecasting, and customer service automation.</p>
-                    <a href="website-agents.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-
-                <!-- Solution 3 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-building text-green-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Real Estate</h3>
-                    <p class="text-gray-400 mb-4">Lead qualification, property matching algorithms, and automated follow-up sequences.</p>
-                    <a href="automation.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-
-                <!-- Solution 4 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-graduation-cap text-yellow-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Education</h3>
-                    <p class="text-gray-400 mb-4">Intelligent tutoring systems, automated grading, and personalized learning paths.</p>
-                    <a href="consulting.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-
-                <!-- Solution 5 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-utensils text-red-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Restaurants</h3>
-                    <p class="text-gray-400 mb-4">Reservation bots, menu optimization, and customer feedback analysis.</p>
-                    <a href="chatbots.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-
-                <!-- Solution 6 -->
-                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition group">
-                    <div class="w-14 h-14 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-briefcase text-indigo-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Professional Services</h3>
-                    <p class="text-gray-400 mb-4">Client intake automation, document generation, and appointment scheduling.</p>
-                    <a href="automation.html" class="text-[#00D4FF] hover:text-[#B829DD] transition text-sm font-semibold">Learn more →</a>
-                </div>
-            </div>
+      </div>
+      
+      <div id="tab-scheduling" class="tab-panel">
+        <div class="tab-content-card">
+          <h3>📅 Smart Scheduling</h3>
+          <p>Self-booking systems that handle the back-and-forth for you. Connect to your existing calendar, send reminders, handle reschedules.</p>
+          <ul>
+            <li>Calendar integration (Google, Outlook, Calendly)</li>
+            <li>AI-powered availability optimization</li>
+            <li>Automated reminders via SMS and email</li>
+            <li>Rescheduling and cancellation handling</li>
+            <li>Buffer time and timezone management</li>
+            <li>Payment collection at booking</li>
+          </ul>
+          <p><strong style="color:var(--text-primary);">Typical ROI:</strong> 60% fewer no-shows, 5+ hours saved per week.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass rounded-2xl p-8 max-w-2xl mx-auto">
-                <h2 class="text-3xl font-bold text-white mb-2 text-center" data-i18n="section_contact_title">Start Your AI Project</h2>
-                <p class="text-gray-400 text-center mb-8" data-i18n="section_contact_desc">Free consultation and project estimate</p>
-                
-                <form id="projectForm" class="space-y-4" data-track="form-project">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Your Name" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]" data-i18n-placeholder="form_placeholder_name">
-                        <input type="email" placeholder="Email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]" data-i18n-placeholder="form_placeholder_email">
-                    </div>
-                    <input type="text" placeholder="Company Name" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]" data-i18n-placeholder="form_placeholder_company">
-                    <select class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]">
-                        <option value="" class="bg-gray-900" data-i18n="form_project_type">Project Type</option>
-                        <option value="website-agent" class="bg-gray-900" data-i18n="form_type_website">Website Agent</option>
-                        <option value="automation" class="bg-gray-900" data-i18n="form_type_automation">Process Automation</option>
-                        <option value="chatbot" class="bg-gray-900" data-i18n="form_type_chatbot">Chatbot</option>
-                        <option value="consulting" class="bg-gray-900" data-i18n="form_type_consulting">AI Consulting</option>
-                        <option value="analytics" class="bg-gray-900" data-i18n="form_type_analytics">Predictive Analytics</option>
-                        <option value="other" class="bg-gray-900" data-i18n="form_type_other">Other</option>
-                    </select>
-                    <textarea placeholder="Tell us about your project..." rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D4FF]" data-i18n-placeholder="form_placeholder_message"></textarea>
-                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-xl text-white font-semibold hover:opacity-90 transition" data-track="cta-form-submit" data-i18n="form_submit">
-                        <i class="fas fa-paper-plane mr-2"></i>Get Free Estimate
-                    </button>
-                </form>
-            </div>
+      </div>
+      
+      <div id="tab-analytics" class="tab-panel">
+        <div class="tab-content-card">
+          <h3>📊 AI Analytics</h3>
+          <p>Real-time dashboards that surface the insights you actually need. Stop drowning in data — start acting on it.</p>
+          <ul>
+            <li>Custom KPI tracking and alerts</li>
+            <li>Predictive analytics for revenue forecasting</li>
+            <li>Customer behavior analysis</li>
+            <li>Operational efficiency metrics</li>
+            <li>Automated report generation</li>
+            <li>Integration with existing BI tools</li>
+          </ul>
+          <p><strong style="color:var(--text-primary);">Typical ROI:</strong> Data-driven decisions improve profitability by 15-25%.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="glass border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00D4FF] to-[#B829DD] flex items-center justify-center">
-                            <i class="fas fa-robot text-white text-sm"></i>
-                        </div>
-                        <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Building intelligent solutions for businesses since 2020.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4" data-i18n="footer_services">Services</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="website-agents.html" class="hover:text-[#00D4FF] transition" data-i18n="footer_link_website_agents">Website Agents</a></li>
-                        <li><a href="automation.html" class="hover:text-[#00D4FF] transition" data-i18n="footer_link_automation">Automation</a></li>
-                        <li><a href="chatbots.html" class="hover:text-[#00D4FF] transition" data-i18n="footer_link_chatbots">Chatbots</a></li>
-                        <li><a href="consulting.html" class="hover:text-[#00D4FF] transition" data-i18n="footer_link_consulting">Consulting</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4" data-i18n="footer_contact">Contact</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><i class="fas fa-envelope mr-2"></i>hello@aidynamic.pro</li>
-                        <li><i class="fas fa-globe mr-2"></i>aidynamic.pro</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4" data-i18n="footer_legal">Legal</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="privacy.html" class="hover:text-white transition" data-i18n="footer_privacy">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-white transition" data-i18n="footer_terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/10 mt-8 pt-8 text-center">
-                <p class="text-gray-500 text-sm" data-i18n="footer_rights">&copy; 2026 AI Dynamics Pro. All rights reserved.</p>
-            </div>
+  <!-- Zero-G Simulation -->
+  <section class="section" id="zero-g" style="background:linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(139,92,246,0.05) 100%);border-top:1px solid rgba(59,130,246,0.1);border-bottom:1px solid rgba(59,130,246,0.1);">
+    <div class="section-header">
+      <span class="section-label">⚡ New Offer</span>
+      <h2>Zero-G Market Simulation</h2>
+      <p class="section-desc">
+        <strong style="color:var(--text-primary);">5,000 AI personas. 48 hours. Your entire market, simulated.</strong>
+      </p>
+    </div>
+    
+    <div style="max-width:800px;margin:0 auto 3rem;">
+      <p style="color:var(--text-secondary);font-size:1rem;line-height:1.8;text-align:center;">
+        Imagine knowing exactly how your customers will react before you spend a dollar on marketing. 
+        Our Zero-G Simulation deploys <strong style="color:var(--electric);">5,000 AI personas</strong> — each with unique demographics, 
+        behaviors, preferences, and decision patterns — to simulate your market with surgical precision. 
+        Test pricing, messaging, product features, and ad campaigns in a risk-free environment. 
+        See what works, what flops, and why — <strong style="color:var(--text-primary);">before you commit real budget</strong>.
+      </p>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:800px;margin:0 auto 3rem;">
+      <div style="text-align:center;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid rgba(59,130,246,0.1);border-radius:16px;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🧠</div>
+        <div style="font-weight:700;color:var(--text-primary);margin-bottom:0.3rem;">5,000 Personas</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Unique AI agents with distinct behaviors, incomes, preferences, and pain points</div>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid rgba(59,130,246,0.1);border-radius:16px;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">⚡</div>
+        <div style="font-weight:700;color:var(--text-primary);margin-bottom:0.3rem;">48-Hour Turnaround</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Full market simulation delivered in 2 days, not 2 months of traditional research</div>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid rgba(59,130,246,0.1);border-radius:16px;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">📊</div>
+        <div style="font-weight:700;color:var(--text-primary);margin-bottom:0.3rem;">Predictive Insights</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">See conversion rates, objections, and buyer journeys before launching</div>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid rgba(59,130,246,0.1);border-radius:16px;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🎯</div>
+        <div style="font-weight:700;color:var(--text-primary);margin-bottom:0.3rem;">Risk-Free Testing</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Test pricing, messaging, and features without spending real ad budget</div>
+      </div>
+    </div>
+    
+    <div style="text-align:center;">
+      <a href="zero-g.html" class="btn-primary" style="margin-right:1rem;">Explore Full Project →</a>
+      <a href="#appointments" class="btn-secondary">Book a Demo</a>
+    </div>
+    
+    <div style="max-width:600px;margin:2rem auto 0;text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:50px;">
+        <span style="color:#22c55e;font-weight:700;font-size:1.2rem;">$99</span>
+        <span style="color:var(--text-muted);font-size:0.8rem;">One-time simulation • Results in 48 hours</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <div class="section-header">
+      <span class="section-label">Investment</span>
+      <h2>Simple Pricing</h2>
+      <p class="section-desc">No hidden fees. No long-term traps. Just results.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card popular">
+        <div class="popular-badge">Most Popular</div>
+        <span class="duration">1 Week</span>
+        <h3>AI Audit</h3>
+        <div class="price" style="position:relative;display:inline-block;">
+          <span style="text-decoration:line-through;text-decoration-color:#ef4444;text-decoration-thickness:3px;opacity:0.6;margin-right:0.5rem;">$99</span>
+          <span style="color:#22c55e;">FREE</span>
         </div>
-    </footer>
+        <p class="price-note">Limited time — normally $99</p>
+        <ul>
+          <li>Full business process audit</li>
+          <li>Automation opportunity map</li>
+          <li>ROI projections per workflow</li>
+          <li>Tool-stack recommendations</li>
+          <li>PDF roadmap in 5 days</li>
+        </ul>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;">$99 credit applied to first build if booked within 14 days.</p>
+        <a href="#appointments" class="btn-primary btn">Book Assessment →</a>
+      </div>
+      
+      <div class="pricing-card">
+        <span class="duration">2-3 Weeks</span>
+        <h3>Single Build</h3>
+        <div class="price">$2,497</div>
+        <p class="price-note">One-time deployment</p>
+        <ul>
+          <li>End-to-end automation build</li>
+          <li>Custom AI agent development</li>
+          <li>Integration with existing tools</li>
+          <li>Dashboard for monitoring</li>
+          <li>30 days post-launch support</li>
+          <li>Team training session</li>
+        </ul>
+        <a href="#appointments" class="btn-primary btn">Start Build →</a>
+      </div>
+      
+      <div class="pricing-card">
+        <span class="duration">Full Partnership</span>
+        <h3>AI Transformation</h3>
+        <div class="price">$4,997<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+        <p class="price-note">3-month minimum</p>
+        <ul>
+          <li>Everything in Single Build</li>
+          <li>Multiple concurrent workflows</li>
+          <li>Continuous AI optimization</li>
+          <li>Ongoing maintenance & updates</li>
+          <li>Monthly strategy sessions</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#appointments" class="btn-primary btn">Book Consultation →</a>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.getElementById('projectForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you! We will contact you within 24 hours with your free project estimate.');
-        });
-    </script>
-    <!-- Shared Language & Calendly Modules -->
-    <script src="shared/language-toggle.js"></script>
-    <script src="shared/calendly-booking.js"></script>
-    <script>
-      window.__i18nBasePath = 'shared/translations/';
-      document.addEventListener('DOMContentLoaded', function() {
-        LanguageToggle.init({ toggleContainerId: 'lang-toggle', basePath: 'shared/translations/' });
-        if (document.getElementById('calendly-widget')) {
-          CalendlyBooking.init({
-            username: 'aidynamicpro',
-            containerId: 'calendly-widget',
-            colors: { primary: '#00D4FF', background: '#0a0a0f', text: '#e0e0e0' }
+  <!-- Appointments / Booking -->
+  <section class="section appointments-section" id="appointments">
+    <div class="section-header">
+      <span class="section-label">Get Started</span>
+      <h2>Book Your Free Strategy Call</h2>
+      <p class="section-desc">30 minutes. We'll audit your setup and show you exactly where AI can make the biggest impact.</p>
+    </div>
+    <div class="appointments-grid">
+      <div class="calendar-card">
+        <h3>📅 Select a Time</h3>
+        <p>Available Monday–Saturday, 9 AM – 6 PM EST</p>
+        <div id="calendar-days" style="display:flex;gap:0.5rem;margin-bottom:1rem;overflow-x:auto;">
+          <!-- Generated by JS -->
+        </div>
+        <div class="time-slots" id="time-slots">
+          <div class="time-slot" data-time="09:00">9:00 AM</div>
+          <div class="time-slot" data-time="10:00">10:00 AM</div>
+          <div class="time-slot" data-time="11:00">11:00 AM</div>
+          <div class="time-slot" data-time="13:00">1:00 PM</div>
+          <div class="time-slot" data-time="14:00">2:00 PM</div>
+          <div class="time-slot" data-time="15:00">3:00 PM</div>
+          <div class="time-slot" data-time="16:00">4:00 PM</div>
+        </div>
+        <p style="font-size:0.75rem;color:var(--text-muted);">⏱️ All calls are 30 minutes via Google Meet</p>
+      </div>
+      
+      <div class="calendar-card">
+        <h3>✏️ Your Info</h3>
+        <p>Tell us about your business so we can prepare.</p>
+        <form class="booking-form" id="booking-form" onsubmit="handleBooking(event)">
+          <div class="form-row">
+            <input type="text" id="book-name" placeholder="Your Name" required>
+            <input type="email" id="book-email" placeholder="Email Address" required>
+          </div>
+          <input type="tel" id="book-phone" placeholder="Phone Number">
+          <input type="text" id="book-company" placeholder="Company Name">
+          <select id="book-service" style="color:var(--text-muted);">
+            <option value="">What service interests you?</option>
+            <option value="audit">AI Audit ($99)</option>
+            <option value="single">Single Build ($2,497)</option>
+            <option value="transformation">AI Transformation ($4,997/mo)</option>
+            <option value="not-sure">Not sure yet — let's talk</option>
+          </select>
+          <textarea id="book-notes" rows="3" placeholder="What challenge are you looking to solve? (Optional)"></textarea>
+          <input type="hidden" id="book-datetime">
+          <button type="submit" class="btn-primary">Confirm Booking →</button>
+        </form>
+        <p id="booking-status" style="margin-top:1rem;font-size:0.85rem;text-align:center;"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center;padding:6rem 2rem;">
+    <h2 style="font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:1rem;">Ready to Automate?</h2>
+    <p style="color:var(--text-secondary);max-width:450px;margin:0 auto 2rem;">Book a call or chat with our AI assistant. We're here 24/7.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#appointments" class="btn-primary">Book a Call →</a>
+      <a href="mailto:jasmelacosta@gmail.com" class="btn-secondary">Email Us</a>
+    </div>
+    <p style="margin-top:2rem;font-size:0.8rem;color:var(--text-muted);">📞 <a href="tel:+17866432099" style="color:var(--electric);">+1 (786) 643-2099</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">AI Dynamic Pro</div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="founders.html">Founders</a></li>
+      <li><a href="#appointments">Book Call</a></li>
+    </ul>
+    <p style="margin-top:1rem;">© 2026 AI Dynamic Pro. All rights reserved.</p>
+    <p style="font-size:0.75rem;margin-top:0.5rem;">Built with ❤️ in Miami, FL</p>
+  </footer>
+
+  <!-- Chatbot Widget -->
+  <div class="chatbot-widget">
+    <div class="chatbot-panel hidden" id="chatbot-panel">
+      <div class="chatbot-header">
+        <div>
+          <h4>AI Assistant</h4>
+          <div class="status"><span class="status-dot"></span> Online</div>
+        </div>
+        <button onclick="toggleChatbot()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;">✕</button>
+      </div>
+      <div class="chatbot-messages" id="chat-messages">
+        <div class="chat-message bot">Hi! I'm the AI Dynamic Pro assistant. How can I help you today? Ask me about our services, pricing, or book a call.</div>
+      </div>
+      <div class="chatbot-input-area">
+        <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" title="Voice input">🎤</button>
+        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendMessage()">
+        <button onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+    <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+  </div>
+
+  <script>
+    // ── SPLASH SCREEN ──
+    window.addEventListener('load', () => {
+      const bar = document.querySelector('.splash-loader-bar');
+      bar.style.transition = 'width 1.5s ease';
+      bar.style.width = '100%';
+      setTimeout(() => {
+        document.getElementById('splash').classList.add('hidden');
+      }, 1800);
+    });
+
+    // ── NAV SCROLL ──
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── MOBILE MENU ──
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // ── TABS ──
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      
+      const targetBtn = document.querySelector(`.tab-btn[onclick="openTab('${tabId}')"]`);
+      const targetPanel = document.getElementById('tab-' + tabId);
+      
+      if (targetBtn) targetBtn.classList.add('active');
+      if (targetPanel) targetPanel.classList.add('active');
+      
+      // Scroll to details section
+      document.getElementById('details').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── CALENDAR ──
+    function generateCalendar() {
+      const container = document.getElementById('calendar-days');
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const today = new Date();
+      
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+        
+        const dayEl = document.createElement('div');
+        dayEl.className = 'day-selector' + (i === 0 ? ' selected' : '');
+        dayEl.style.cssText = `
+          min-width: 60px; padding: 0.8rem; text-align: center;
+          background: ${i === 0 ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.03)'};
+          border: 1px solid ${i === 0 ? 'transparent' : 'rgba(59,130,246,0.15)'};
+          border-radius: 12px; cursor: pointer; transition: all 0.3s;
+          color: ${i === 0 ? 'white' : 'var(--text-secondary)'};
+        `;
+        dayEl.innerHTML = `
+          <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.3rem;">${days[date.getDay()]}</div>
+          <div style="font-size:1.2rem;font-weight:700;">${date.getDate()}</div>
+        `;
+        dayEl.onclick = function() {
+          document.querySelectorAll('.day-selector').forEach(d => {
+            d.style.background = 'rgba(255,255,255,0.03)';
+            d.style.borderColor = 'rgba(59,130,246,0.15)';
+            d.style.color = 'var(--text-secondary)';
           });
-        }
+          this.style.background = 'var(--accent-gradient)';
+          this.style.borderColor = 'transparent';
+          this.style.color = 'white';
+          updateSelectedDate(date);
+        };
+        container.appendChild(dayEl);
+      }
+    }
+    
+    let selectedDate = new Date();
+    let selectedTime = null;
+    
+    function updateSelectedDate(date) {
+      selectedDate = date;
+      updateBookingDateTime();
+    }
+    
+    // Time slot selection
+    document.querySelectorAll('.time-slot').forEach(slot => {
+      slot.addEventListener('click', function() {
+        if (this.classList.contains('booked')) return;
+        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedTime = this.dataset.time;
+        updateBookingDateTime();
       });
-    </script>
+    });
+    
+    function updateBookingDateTime() {
+      if (selectedDate && selectedTime) {
+        const dateStr = selectedDate.toISOString().split('T')[0];
+        document.getElementById('book-datetime').value = `${dateStr}T${selectedTime}`;
+      }
+    }
+
+    // ── BOOKING FORM ──
+    function handleBooking(e) {
+      e.preventDefault();
+      const status = document.getElementById('booking-status');
+      const datetime = document.getElementById('book-datetime').value;
+      
+      if (!datetime) {
+        status.innerHTML = '<span style="color:#ef4444;">⚠️ Please select a date and time.</span>';
+        return;
+      }
+      
+      const name = document.getElementById('book-name').value;
+      const email = document.getElementById('book-email').value;
+      const phone = document.getElementById('book-phone').value;
+      const company = document.getElementById('book-company').value;
+      const service = document.getElementById('book-service').value;
+      const notes = document.getElementById('book-notes').value;
+      
+      status.innerHTML = '<span style="color:var(--electric);">⏳ Processing your booking...</span>';
+      
+      // Simulate API call
+      setTimeout(() => {
+        status.innerHTML = `
+          <span style="color:#22c55e;">✅ Booking confirmed!</span><br>
+          <span style="font-size:0.8rem;color:var(--text-muted);">
+            We'll send a confirmation to ${email} with Google Meet link.<br>
+            Date: ${selectedDate.toDateString()} at ${selectedTime}
+          </span>
+        `;
+        
+        // Reset form
+        document.getElementById('booking-form').reset();
+        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+        selectedTime = null;
+        
+        // Send to backend (placeholder)
+        console.log('Booking:', { name, email, phone, company, service, notes, datetime });
+      }, 1500);
+    }
+
+    // ── CHATBOT ──
+    function toggleChatbot() {
+      document.getElementById('chatbot-panel').classList.toggle('hidden');
+    }
+    
+    let isRecording = false;
+    let recognition = null;
+    
+    // Speech recognition setup
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('chat-input').value = transcript;
+        sendMessage();
+      };
+      
+      recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        stopRecording();
+      };
+      
+      recognition.onend = function() {
+        stopRecording();
+      };
+    }
+    
+    function toggleVoice() {
+      if (!recognition) {
+        alert('Voice input is not supported in your browser. Please type your message.');
+        return;
+      }
+      
+      if (isRecording) {
+        recognition.stop();
+        stopRecording();
+      } else {
+        recognition.start();
+        isRecording = true;
+        document.getElementById('voice-btn').classList.add('recording');
+        document.getElementById('voice-btn').title = 'Recording... Click to stop';
+      }
+    }
+    
+    function stopRecording() {
+      isRecording = false;
+      document.getElementById('voice-btn').classList.remove('recording');
+      document.getElementById('voice-btn').title = 'Voice input';
+    }
+    
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message) return;
+      
+      const messagesContainer = document.getElementById('chat-messages');
+      
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-message user';
+      userMsg.textContent = message;
+      messagesContainer.appendChild(userMsg);
+      
+      input.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Show typing indicator
+      const typing = document.createElement('div');
+      typing.className = 'typing-indicator';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      typing.id = 'typing-indicator';
+      messagesContainer.appendChild(typing);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Generate response
+      setTimeout(() => {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) typingIndicator.remove();
+        
+        const response = generateResponse(message);
+        const botMsg = document.createElement('div');
+        botMsg.className = 'chat-message bot';
+        botMsg.innerHTML = response;
+        messagesContainer.appendChild(botMsg);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        // Text-to-speech for bot response
+        speakText(response.replace(/<[^>]*>/g, ''));
+      }, 1000 + Math.random() * 1000);
+    }
+    
+    function generateResponse(message) {
+      const lower = message.toLowerCase();
+      
+      if (lower.includes('price') || lower.includes('cost') || lower.includes('pricing')) {
+        return `Our pricing is simple:<br><br>
+        • <strong>AI Audit:</strong> $99 (one-time)<br>
+        • <strong>Single Build:</strong> $2,497 (one-time)<br>
+        • <strong>AI Transformation:</strong> $4,997/mo<br><br>
+        The $99 audit credit applies to your first build. <a href="#pricing" style="color:var(--electric);" onclick="toggleChatbot();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">See full details →</a>`;
+      }
+      
+      if (lower.includes('service') || lower.includes('do') || lower.includes('offer')) {
+        return `We offer 4 core services:<br><br>
+        1. <strong>AI Customer Service</strong> — 24/7 chatbots & voice agents<br>
+        2. <strong>Process Automation</strong> — Eliminate repetitive tasks<br>
+        3. <strong>Lead Generation</strong> — AI-powered outreach<br>
+        4. <strong>Smart Scheduling</strong> — Self-booking systems<br><br>
+        <a href="#services" style="color:var(--electric);" onclick="toggleChatbot();document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore services →</a>`;
+      }
+      
+      if (lower.includes('book') || lower.includes('call') || lower.includes('appointment') || lower.includes('schedule')) {
+        return `You can book a free 30-minute strategy call. We'll audit your setup and show you where AI can make the biggest impact.<br><br>
+        <a href="#appointments" style="color:var(--electric);" onclick="toggleChatbot();document.getElementById('appointments').scrollIntoView({behavior:'smooth'})">Book now →</a>`;
+      }
+      
+      if (lower.includes('time') || lower.includes('long') || lower.includes('deploy')) {
+        return `Typical deployment timeline:<br><br>
+        • <strong>AI Audit:</strong> 5 business days<br>
+        • <strong>Single Build:</strong> 2-3 weeks<br>
+        • <strong>AI Transformation:</strong> Ongoing partnership<br><br>
+        Most clients see ROI within the first 30 days.`;
+      }
+      
+      if (lower.includes('founder') || lower.includes('team') || lower.includes('about')) {
+        return `AI Dynamic Pro was founded by Jasmel Acosta, a developer and entrepreneur with 15+ years of experience building tech solutions for healthcare and small businesses.<br><br>
+        <a href="founders.html" style="color:var(--electric);" onclick="toggleChatbot()">Meet the team →</a>`;
+      }
+      
+      if (lower.includes('contact') || lower.includes('email') || lower.includes('phone')) {
+        return `You can reach us:<br><br>
+        📞 <a href="tel:+17866432099" style="color:var(--electric);">+1 (786) 643-2099</a><br>
+        ✉️ <a href="mailto:jasmelacosta@gmail.com" style="color:var(--electric);">jasmelacosta@gmail.com</a><br><br>
+        Or book a call directly: <a href="#appointments" style="color:var(--electric);" onclick="toggleChatbot();document.getElementById('appointments').scrollIntoView({behavior:'smooth'})">Book here →</a>`;
+      }
+      
+      if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+        return `Hello! 👋 I'm the AI Dynamic Pro assistant. Ask me about:<br><br>
+        • Our services & pricing<br>
+        • Booking a strategy call<br>
+        • Deployment timelines<br>
+        • The team behind AI Dynamic Pro`;
+      }
+      
+      return `That's a great question. I'd recommend booking a free strategy call so we can dive into your specific needs.<br><br>
+      <a href="#appointments" style="color:var(--electric);" onclick="toggleChatbot();document.getElementById('appointments').scrollIntoView({behavior:'smooth'})">Book a call →</a><br><br>
+      Or email us at <a href="mailto:jasmelacosta@gmail.com" style="color:var(--electric);">jasmelacosta@gmail.com</a>`;
+    }
+    
+    // Text-to-speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        
+        // Try to find a good voice
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Samantha') || v.name.includes('Karen'));
+        if (preferredVoice) utterance.voice = preferredVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+    
+    // Load voices (needed for some browsers)
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = function() {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // ── GSAP ANIMATIONS ──
+    if (typeof gsap !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.from('.hero-content > *', {
+        y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 2
+      });
+      
+      gsap.from('.service-card', {
+        scrollTrigger: { trigger: '#services', start: 'top 80%' },
+        y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+      });
+      
+      gsap.from('.pricing-card', {
+        scrollTrigger: { trigger: '#pricing', start: 'top 80%' },
+        y: 40, opacity: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out'
+      });
+      
+      gsap.from('.calendar-card', {
+        scrollTrigger: { trigger: '#appointments', start: 'top 80%' },
+        y: 30, opacity: 0, duration: 0.6, stagger: 0.2, ease: 'power2.out'
+      });
+    }
+
+    // Initialize
+    generateCalendar();
+  </script>
 </body>
 </html>
