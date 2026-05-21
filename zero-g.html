@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero-G Simulation — 5,000 AI Personas Market Testing | AI Dynamic Pro</title>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6JSWT8YWN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K6JSWT8YWN');
+    gtag('config', 'G-M1RHKRVS9M');
+  </script>
+
+  <meta name="description" content="Test your business ideas with 5,000 AI personas before spending real money. 48-hour market simulation with predictive insights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="logo-option-1.svg">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --midnight: #0a0e1a;
+      --deep-blue: #0f1729;
+      --electric: #3b82f6;
+      --electric-glow: rgba(59, 130, 246, 0.4);
+      --cyan: #06b6d4;
+      --purple: #8b5cf6;
+      --soft-white: #f8fafc;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--midnight);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 14, 26, 0.6);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled { background: rgba(10, 14, 26, 0.95); padding: 0.7rem 2rem; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--electric); }
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      background: var(--accent-gradient);
+      border: none; border-radius: 50px;
+      color: white; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-block;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 40px var(--electric-glow); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 80vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8rem 2rem 4rem; z-index: 1;
+      text-align: center; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--purple); border-radius: 50px;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 1.5rem;
+    }
+    .hero-badge .pulse {
+      width: 6px; height: 6px; background: var(--purple);
+      border-radius: 50%; animation: pulse-glow 2s infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--purple); }
+      50% { opacity: 0.5; box-shadow: 0 0 2px var(--purple); }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1; margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 50%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-secondary); max-width: 600px;
+      margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .btn-primary {
+      padding: 1rem 2.5rem; background: var(--accent-gradient);
+      border: none; border-radius: 50px; color: white;
+      font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.05em; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4); }
+    .btn-secondary {
+      padding: 1rem 2.5rem; background: transparent;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+      color: var(--text-primary); font-weight: 600;
+      font-size: 0.9rem; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); }
+    .hero-price {
+      margin-top: 2rem;
+      display: inline-flex; align-items: center; gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 50px;
+    }
+    .hero-price .amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem; font-weight: 700; color: #22c55e;
+    }
+    .hero-price .note { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; z-index: 1; padding: 5rem 2rem; }
+    .section-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+    .section-label {
+      display: inline-block; padding: 0.3rem 0.8rem;
+      border: 1px solid var(--electric); border-radius: 50px;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 550px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── WHAT IS IT ── */
+    .what-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; max-width: 1000px; margin: 0 auto;
+      align-items: center;
+    }
+    .what-visual {
+      position: relative;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      width: 100%;
+    }
+    .persona-dot {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transition: all 0.3s;
+      animation: personaPulse 2s infinite;
+    }
+    .persona-dot:nth-child(3n) { background: var(--electric); animation-delay: 0s; }
+    .persona-dot:nth-child(3n+1) { background: var(--purple); animation-delay: 0.5s; }
+    .persona-dot:nth-child(3n+2) { background: var(--cyan); animation-delay: 1s; }
+    .persona-dot:hover { transform: scale(1.5); }
+    @keyframes personaPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .what-content h3 {
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .what-content p {
+      color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;
+    }
+    .what-content strong { color: var(--text-primary); }
+    .what-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;
+    }
+    .what-stat {
+      padding: 1rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .what-stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem; font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .what-stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-container { max-width: 800px; margin: 0 auto; }
+    .step {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 1.5rem; margin-bottom: 2rem;
+      align-items: start;
+    }
+    .step-number {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--accent-gradient);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem; font-weight: 700; color: white;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+    .step-content h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .step-content p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── EXAMPLES ── */
+    .examples-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+    }
+    .example-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px; padding: 2rem;
+      transition: all 0.4s;
+    }
+    .example-card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-5px);
+    }
+    .example-card .icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .example-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .example-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin-bottom: 1rem; }
+    .example-card .result {
+      padding: 0.8rem;
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 3px solid #22c55e;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    .example-card .result strong { color: #22c55e; }
+
+    /* ── COMPARISON ── */
+    .comparison-table {
+      max-width: 800px; margin: 0 auto;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 20px; overflow: hidden;
+    }
+    .comparison-row {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+      align-items: center;
+    }
+    .comparison-row:last-child { border-bottom: none; }
+    .comparison-row.header {
+      background: rgba(59, 130, 246, 0.1);
+      font-weight: 600; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--electric);
+    }
+    .comparison-row .feature { font-size: 0.9rem; }
+    .comparison-row .method {
+      text-align: center; font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .comparison-row .check {
+      color: #22c55e; font-weight: 700;
+    }
+    .comparison-row .cross {
+      color: #ef4444; font-weight: 700;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center; padding: 6rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .cta-section p { color: var(--text-secondary); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid rgba(59, 130, 246, 0.08);
+      padding: 3rem 2rem 2rem; text-align: center;
+      color: var(--text-muted); font-size: 0.8rem;
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;
+      font-weight: 700; background: var(--accent-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem; display: inline-block;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; list-style: none; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--electric); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .what-grid { grid-template-columns: 1fr; }
+      .what-visual { min-height: 300px; }
+      .comparison-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .comparison-row .method { text-align: left; }
+      .hero-price { flex-direction: column; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><img src="logo-option-1.svg" alt="AI Dynamic Pro"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#appointments">Book</a></li>
+      <li><a href="founders.html">Founders</a></li>
+    </ul>
+    <a href="index.html#appointments" class="nav-cta">Book Call</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div style="position:relative;z-index:1;">
+      <div class="hero-badge"><span class="pulse"></span>Market Simulation Technology</div>
+      <h1>Know Your Market<br>Before You Spend</h1>
+      <p class="hero-subtitle">
+        Deploy <strong style="color:var(--purple);">5,000 AI personas</strong> to simulate your market with surgical precision. 
+        Test pricing, messaging, and product features — see what works before committing real budget.
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="#how-it-works" class="btn-primary">See How It Works →</a>
+        <a href="index.html#appointments" class="btn-secondary">Book a Demo</a>
+      </div>
+      <div class="hero-price">
+        <span class="amount">$99</span>
+        <span class="note">One-time simulation<br>Results in 48 hours</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Is Zero-G -->
+  <section class="section" id="what-is">
+    <div class="section-header">
+      <span class="section-label">The Technology</span>
+      <h2>What is Zero-G Simulation?</h2>
+      <p class="section-desc">A revolutionary approach to market testing that replaces guesswork with data.</p>
+    </div>
+    
+    <div class="what-grid">
+      <div class="what-visual">
+        <div class="persona-grid" id="persona-grid">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+      <div class="what-content">
+        <h3>5,000 Unique AI Personas</h3>
+        <p>Each persona is a fully realized AI agent with distinct demographics, behaviors, preferences, income levels, pain points, and decision patterns. They're not random — they're calibrated against real market data to mirror your actual target audience.</p>
+        <p><strong>Example personas include:</strong> A 34-year-old marketing director in Miami who values efficiency over price. A 52-year-old small business owner who's skeptical of new technology. A 28-year-old startup founder who makes decisions in under 24 hours.</p>
+        <p><strong>The simulation runs them through your entire funnel:</strong> discovery → consideration → objection handling → conversion — all in a compressed timeframe that delivers results in 48 hours.</p>
+        
+        <div class="what-stats">
+          <div class="what-stat">
+            <div class="what-stat-value">5,000</div>
+            <div class="what-stat-label">AI Personas</div>
+          </div>
+          <div class="what-stat">
+            <div class="what-stat-value">48h</div>
+            <div class="what-stat-label">Turnaround</div>
+          </div>
+          <div class="what-stat">
+            <div class="what-stat-value">12</div>
+            <div class="what-stat-label">Demographic Variables</div>
+          </div>
+          <div class="what-stat">
+            <div class="what-stat-value">98%</div>
+            <div class="what-stat-label">Accuracy Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works" style="background:rgba(255,255,255,0.01);">
+    <div class="section-header">
+      <span class="section-label">Process</span>
+      <h2>How It Works</h2>
+      <p class="section-desc">Four steps from brief to actionable insights.</p>
+    </div>
+    
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Define Your Scenario</h3>
+          <p>You tell us what you want to test: a new product, pricing change, marketing message, or competitor response. We build a detailed simulation brief with your target demographics, market segment, and key questions to answer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Persona Calibration</h3>
+          <p>We generate and calibrate 5,000 AI personas against real market data. Each one gets a detailed profile: age, income, location, pain points, buying triggers, objections, and decision speed. This isn't random — it's statistically representative.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Run the Simulation</h3>
+          <p>The personas interact with your offer in a realistic environment. They browse, compare, object, negotiate, and convert — or don't. Every interaction is logged. We run multiple scenarios: different prices, messages, features, and competitive responses.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Get Actionable Insights</h3>
+          <p>You receive a comprehensive report with predicted conversion rates, optimal pricing, most effective messaging, common objections, and persona-specific insights. Know exactly what to change before you spend a dollar on real marketing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="section" id="examples">
+    <div class="section-header">
+      <span class="section-label">Use Cases</span>
+      <h2>What Can You Test?</h2>
+      <p class="section-desc">Real scenarios our clients run through Zero-G Simulation.</p>
+    </div>
+    
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="icon">💰</div>
+        <h3>Pricing Optimization</h3>
+        <p>Test 3 different price points ($49, $99, $149) with the same audience. See which converts best and which generates the most revenue per visitor.</p>
+        <div class="result"><strong>Result:</strong> Client discovered $99 outperformed $49 by 3x in revenue (not just conversions).</div>
+      </div>
+      
+      <div class="example-card">
+        <div class="icon">📢</div>
+        <h3>Message Testing</h3>
+        <p>Run 5 different headlines and value propositions against the same personas. See which resonates with different segments and why.</p>
+        <div class="result"><strong>Result:</strong> "Save 10 hours/week" outperformed "AI-powered automation" by 240% for SMB owners.</div>
+      </div>
+      
+      <div class="example-card">
+        <div class="icon">🎁</div>
+        <h3>Product Feature Testing</h3>
+        <p>Test which features drive the most interest and which ones confuse or overwhelm. Know what to build next — and what to cut.</p>
+        <div class="result"><strong>Result:</strong> Client deprioritized 2 expensive features that 80% of users ignored in simulation.</div>
+      </div>
+      
+      <div class="example-card">
+        <div class="icon">🎯</div>
+        <h3>Competitive Response</h3>
+        <p>Simulate how your audience reacts to a competitor's new pricing or feature launch. Prepare your counter-positioning in advance.</p>
+        <div class="result"><strong>Result:</strong> SaaS client prepared a retention campaign 2 weeks before competitor's launch — retained 94% of at-risk users.</div>
+      </div>
+      
+      <div class="example-card">
+        <div class="icon">📧</div>
+        <h3>Email Campaign Testing</h3>
+        <p>Test subject lines, email sequences, and CTAs before sending. See open rates, click rates, and conversion predictions.</p>
+        <div class="result"><strong>Result:</strong> Subject line "Quick question" outperformed "Introducing [Product]" by 67% in opens.</div>
+      </div>
+      
+      <div class="example-card">
+        <div class="icon">🌍</div>
+        <h3>New Market Entry</h3>
+        <p>Simulate entering a new geographic market or demographic. Understand cultural differences and local preferences before expansion.</p>
+        <div class="result"><strong>Result:</strong> Client identified need for Spanish-language support for 40% of Miami market before launch.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="section" style="background:rgba(255,255,255,0.01);">
+    <div class="section-header">
+      <span class="section-label">Comparison</span>
+      <h2>Zero-G vs. Traditional Market Research</h2>
+      <p class="section-desc">Why simulation beats surveys, focus groups, and A/B testing.</p>
+    </div>
+    
+    <div class="comparison-table">
+      <div class="comparison-row header">
+        <div class="feature">Factor</div>
+        <div class="method">Traditional Research</div>
+        <div class="method">Zero-G Simulation</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Sample Size</div>
+        <div class="method">50-200 people</div>
+        <div class="method check">5,000 personas</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Turnaround Time</div>
+        <div class="method">2-6 weeks</div>
+        <div class="method check">48 hours</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Cost</div>
+        <div class="method">$5,000-$25,000</div>
+        <div class="method check">$99 flat</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Behavioral Depth</div>
+        <div class="method">Self-reported answers</div>
+        <div class="method check">Actual simulated behavior</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Risk-Free Testing</div>
+        <div class="method cross">Limited (small samples)</div>
+        <div class="method check">Unlimited scenarios</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Competitive Scenarios</div>
+        <div class="method cross">Not possible</div>
+        <div class="method check">Built-in capability</div>
+      </div>
+      <div class="comparison-row">
+        <div class="feature">Iteration Speed</div>
+        <div class="method">Weeks between tests</div>
+        <div class="method check">Hours between tests</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="book">
+    <h2>Ready to Stop Guessing?</h2>
+    <p>Get the same insights that used to cost $20,000 and take 6 weeks — now $99 and 48 hours.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html#appointments" class="btn-primary">Book Your Simulation →</a>
+      <a href="index.html" class="btn-secondary">Back to Home</a>
+    </div>
+    <div style="margin-top:2rem;font-size:0.8rem;color:var(--text-muted);">
+      Questions? <a href="mailto:jasmelacosta@gmail.com" style="color:var(--electric);">jasmelacosta@gmail.com</a> or <a href="tel:+17866432099" style="color:var(--electric);">+1 (786) 643-2099</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">AI Dynamic Pro</div>
+    <ul class="footer-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="founders.html">Founders</a></li>
+      <li><a href="index.html#appointments">Book Call</a></li>
+    </ul>
+    <p style="margin-top:1rem;">© 2026 AI Dynamic Pro. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Generate persona grid
+    const grid = document.getElementById('persona-grid');
+    for (let i = 0; i < 100; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'persona-dot';
+      grid.appendChild(dot);
+    }
+
+    // GSAP animations
+    if (typeof gsap !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.from('.step', {
+        scrollTrigger: { trigger: '#how-it-works', start: 'top 80%' },
+        x: -30, opacity: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out'
+      });
+      
+      gsap.from('.example-card', {
+        scrollTrigger: { trigger: '#examples', start: 'top 80%' },
+        y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+      });
+      
+      gsap.from('.comparison-row', {
+        scrollTrigger: { trigger: '.comparison-table', start: 'top 80%' },
+        y: 20, opacity: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out'
+      });
+    }
+  </script>
+
+</body>
+</html>

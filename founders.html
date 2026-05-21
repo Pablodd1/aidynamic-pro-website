@@ -1,283 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Founder — AI Dynamics Pro</title>
-    <meta name="description" content="Meet Jasmel Acosta, founder of AI Dynamics Pro — building AI-powered solutions for business growth.">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <link rel="icon" type="image/png" href="logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; }
-        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-text { background: linear-gradient(to right, #00D4FF, #B829DD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glow-blue { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
-        .glow-purple { box-shadow: 0 0 20px rgba(184,41,221,0.3); }
-        
-        .profile-frame {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .profile-frame::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00D4FF, #B829DD);
-            z-index: -1;
-        }
-        .profile-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #0a0a0f;
-        }
-        
-        .tech-border {
-            border: 1px solid rgba(0,212,255,0.2);
-            position: relative;
-        }
-        .tech-border::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 20%;
-            right: 20%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00D4FF, transparent);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .float-anim { animation: float 6s ease-in-out infinite; }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.2); }
-            50% { box-shadow: 0 0 40px rgba(0,212,255,0.4); }
-        }
-        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founders — AI Dynamic Pro</title>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6JSWT8YWN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K6JSWT8YWN');
+    gtag('config', 'G-M1RHKRVS9M');
+  </script>
+
+  <meta name="description" content="Meet the team behind AI Dynamic Pro. Jasmel Acosta and the founding team building AI automation for small businesses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="logo-option-1.svg">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --midnight: #0a0e1a;
+      --deep-blue: #0f1729;
+      --electric: #3b82f6;
+      --electric-glow: rgba(59, 130, 246, 0.4);
+      --cyan: #06b6d4;
+      --soft-white: #f8fafc;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--midnight);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 14, 26, 0.6);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled { background: rgba(10, 14, 26, 0.95); padding: 0.7rem 2rem; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--electric); }
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      background: var(--accent-gradient);
+      border: none; border-radius: 50px;
+      color: white; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-block;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 40px var(--electric-glow); }
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+    .mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 60vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 7rem 2rem 4rem; z-index: 1;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1; margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 50%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; z-index: 1; padding: 4rem 2rem; }
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+    .section-label {
+      display: inline-block; padding: 0.3rem 0.8rem;
+      border: 1px solid var(--electric); border-radius: 50px;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.1; margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #fff 0%, var(--electric) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+    /* ── FOUNDER CARD ── */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .founder-image {
+      text-align: center;
+    }
+    .founder-image img {
+      width: 280px; height: 280px;
+      border-radius: 50%; object-fit: cover;
+      border: 3px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+    }
+    .founder-title {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--electric);
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .founder-name {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .founder-role {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .founder-bio {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .founder-bio strong {
+      color: var(--text-primary);
+    }
+    .founder-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .founder-stat {
+      text-align: center;
+    }
+    .founder-stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .founder-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .social-links a {
+      color: var(--text-muted);
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .social-links a:hover {
+      color: var(--electric);
+    }
+
+    /* ── VALUES ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(59, 130, 246, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s;
+    }
+    .value-card:hover {
+      border-color: rgba(59, 130, 246, 0.2);
+      transform: translateY(-5px);
+    }
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .value-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .value-card p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid rgba(59, 130, 246, 0.08);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--electric); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0.8rem 1rem; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: flex; }
+      .hero { padding: 6rem 1rem 3rem; }
+      .founder-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+      .founder-image img {
+        width: 200px; height: 200px;
+      }
+      .founder-stats {
+        justify-content: center;
+      }
+      .social-links {
+        justify-content: center;
+      }
+      .section { padding: 3rem 1rem; }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 3px; }
+  </style>
 </head>
-<body class="min-h-screen">
-    <!-- Navigation -->
-    <nav class="glass fixed top-0 left-0 right-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex items-center gap-2">
-                    <img src="logo.png" alt="AI Dynamic Pro" class="h-10 w-auto">
-                    <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
-                </a>
-                <div class="flex items-center gap-6">
-                    <a href="index.html#services" class="text-gray-300 hover:text-white transition">Services</a>
-                    <a href="index.html#solutions" class="text-gray-300 hover:text-white transition">Solutions</a>
-                    <a href="founders.html" class="text-white font-semibold">Founder</a>
-                    <a href="index.html#contact" class="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-lg text-white font-semibold hover:opacity-90 transition">
-                        Get Started
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero -->
-    <section class="pt-32 pb-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00D4FF] text-sm font-medium mb-6">
-                <i class="fas fa-user-tie"></i> Leadership
-            </span>
-            <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4">
-                Meet the <span class="gradient-text">Founder</span>
-            </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                The mind behind AI Dynamics Pro — turning artificial intelligence into real business results.
-            </p>
-        </div>
-    </section>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><img src="logo-option-1.svg" alt="AI Dynamic Pro"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#appointments">Book</a></li>
+      <li><a href="founders.html">Founders</a></li>
+    </ul>
+    <a href="index.html#appointments" class="nav-cta">Book Call</a>
+    <button class="mobile-toggle" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-    <!-- Founder Profile -->
-    <section class="py-12">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass rounded-3xl p-10 tech-border pulse-glow">
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <!-- Profile Image -->
-                    <div class="flex-shrink-0">
-                        <div class="profile-frame float-anim">
-                            <img src="jasmel-profile.png" alt="Jasmel Acosta" onerror="this.src='https://ui-avatars.com/api/?name=Jasmel+Acosta&background=0a0a0f&color=00D4FF&size=160'">
-                        </div>
-                    </div>
-                    
-                    <!-- Info -->
-                    <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-3xl font-bold text-white mb-2">Jasmel Acosta</h2>
-                        <p class="text-[#00D4FF] font-semibold text-lg mb-4">Founder & CEO — AI Dynamics Pro</p>
-                        
-                        <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-6">
-                            <span class="px-3 py-1 rounded-full bg-[#00D4FF]/10 text-[#00D4FF] text-sm border border-[#00D4FF]/20">
-                                <i class="fas fa-robot mr-1"></i>AI Strategy
-                            </span>
-                            <span class="px-3 py-1 rounded-full bg-[#B829DD]/10 text-[#B829DD] text-sm border border-[#B829DD]/20">
-                                <i class="fas fa-code mr-1"></i>Full-Stack Development
-                            </span>
-                            <span class="px-3 py-1 rounded-full bg-[#00FF88]/10 text-[#00FF88] text-sm border border-[#00FF88]/20">
-                                <i class="fas fa-chart-line mr-1"></i>Business Automation
-                            </span>
-                        </div>
-                        
-                        <p class="text-gray-400 leading-relaxed mb-6">
-                            Serial entrepreneur and AI architect with a track record of building intelligent systems that transform how businesses operate. From AI-powered website agents that convert visitors 24/7 to automation workflows that save 20+ hours per week — Jasmel designs solutions that deliver measurable ROI.
-                        </p>
-                        
-                        <div class="grid grid-cols-3 gap-4 mb-6">
-                            <div class="text-center">
-                                <p class="text-2xl font-bold text-[#00D4FF]">150+</p>
-                                <p class="text-gray-500 text-xs">AI Projects</p>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-2xl font-bold text-[#B829DD]">98%</p>
-                                <p class="text-gray-500 text-xs">Client Satisfaction</p>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-2xl font-bold text-[#00FF88]">3x</p>
-                                <p class="text-gray-500 text-xs">Avg ROI</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-center md:justify-start gap-4">
-                            <a href="https://www.linkedin.com/in/jasmel-acosta/" target="_blank" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-[#00D4FF] hover:border-[#00D4FF]/50 transition">
-                                <i class="fab fa-linkedin text-lg"></i>
-                            </a>
-                            <a href="https://aidynamic.pro" target="_blank" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-[#B829DD] hover:border-[#B829DD]/50 transition">
-                                <i class="fas fa-globe text-lg"></i>
-                            </a>
-                            <a href="mailto:hello@aidynamic.pro" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-[#00FF88] hover:border-[#00FF88]/50 transition">
-                                <i class="fas fa-envelope text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(10,14,26,0.98);padding:6rem 2rem 2rem;">
+    <button onclick="toggleMobileMenu()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">✕</button>
+    <div style="display:flex;flex-direction:column;gap:2rem;align-items:center;">
+      <a href="index.html#services" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Services</a>
+      <a href="index.html#pricing" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Pricing</a>
+      <a href="index.html#appointments" onclick="toggleMobileMenu()" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Book Call</a>
+      <a href="founders.html" style="color:var(--text-primary);text-decoration:none;font-size:1.2rem;">Founders</a>
+    </div>
+  </div>
 
-    <!-- Philosophy -->
-    <section class="py-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass rounded-2xl p-8 tech-border">
-                    <div class="w-12 h-12 rounded-xl bg-[#00D4FF]/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-lightbulb text-[#00D4FF] text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">The Vision</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Every business deserves AI that works while they sleep. Not complex dashboards — intelligent agents that handle leads, answer questions, book appointments, and optimize themselves. AI shouldn't be a luxury for Fortune 500s only.
-                    </p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 tech-border">
-                    <div class="w-12 h-12 rounded-xl bg-[#B829DD]/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-rocket text-[#B829DD] text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">The Approach</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Start with the business problem, not the technology. We audit your workflows, identify the highest-ROI automation opportunities, and deploy AI solutions that integrate with your existing tools — CRM, email, calendar, everything.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <span class="section-label">The Team</span>
+      <h1>Meet the Founders</h1>
+      <p>Small business operators who believe AI should work for you — not the other way around.</p>
+    </div>
+  </section>
 
-    <!-- Companies -->
-    <section class="py-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-white text-center mb-10">Ecosystem</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <a href="https://aidynamic.pro" class="glass rounded-2xl p-6 text-center hover:bg-white/10 transition tech-border">
-                    <i class="fas fa-robot text-3xl text-[#00D4FF] mb-3"></i>
-                    <h4 class="font-bold text-white">AI Dynamics Pro</h4>
-                    <p class="text-xs text-gray-500 mt-1">AI Solutions</p>
-                </a>
-                <a href="https://medicalbillingmb.com" target="_blank" class="glass rounded-2xl p-6 text-center hover:bg-white/10 transition tech-border">
-                    <i class="fas fa-heartbeat text-3xl text-[#0080FF] mb-3"></i>
-                    <h4 class="font-bold text-white">Medical Billing MB</h4>
-                    <p class="text-xs text-gray-500 mt-1">Healthcare Revenue</p>
-                </a>
-                <a href="https://305business-llc.vercel.app" target="_blank" class="glass rounded-2xl p-6 text-center hover:bg-white/10 transition tech-border">
-                    <i class="fas fa-building text-3xl text-[#FF6B35] mb-3"></i>
-                    <h4 class="font-bold text-white">305business.llc</h4>
-                    <p class="text-xs text-gray-500 mt-1">Business Marketplace</p>
-                </a>
-            </div>
+  <!-- Founder Profile -->
+  <section class="section">
+    <div class="founder-grid">
+      <div class="founder-image">
+        <img src="jasmel-profile.png" alt="Jasmel Acosta - Founder">
+        <div class="social-links" style="justify-content:center;margin-top:1.5rem;">
+          <a href="https://linkedin.com/in/jasmelacosta" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://twitter.com/jasmelacosta" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter
+          </a>
         </div>
-    </section>
+      </div>
+      
+      <div>
+        <span class="founder-title">Founder & CEO</span>
+        <h2 class="founder-name">Jasmel Acosta</h2>
+        <p class="founder-role">Developer, Entrepreneur & AI Strategist</p>
+        
+        <p class="founder-bio">
+          After 15+ years building tech solutions for healthcare and small businesses, I founded AI Dynamic Pro to bridge the gap between cutting-edge AI and real-world business results.
+        </p>
+        
+        <p class="founder-bio">
+          We don't sell buzzwords — we deploy working systems that cut costs, save time, and scale operations without adding headcount.
+        </p>
+        
+        <p class="founder-bio">
+          Every automation we build is designed around one question: <strong>"Does this make you money or save you time?"</strong> If the answer isn't yes, we don't build it.
+        </p>
+        
+        <div class="founder-stats">
+          <div class="founder-stat">
+            <div class="founder-stat-value">50+</div>
+            <div class="founder-stat-label">AI Deployments</div>
+          </div>
+          <div class="founder-stat">
+            <div class="founder-stat-value">$2M+</div>
+            <div class="founder-stat-label">Revenue Impact</div>
+          </div>
+          <div class="founder-stat">
+            <div class="founder-stat-value">14 Days</div>
+            <div class="founder-stat-label">Avg. Deploy Time</div>
+          </div>
+          <div class="founder-stat">
+            <div class="founder-stat-value">15+</div>
+            <div class="founder-stat-label">Years Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA -->
-    <section class="py-16">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="glass rounded-3xl p-10 tech-border">
-                <h2 class="text-3xl font-bold text-white mb-4">Work With Jasmel</h2>
-                <p class="text-gray-400 mb-8">
-                    Book a free 30-minute strategy call. Discuss your business challenges and get a roadmap for AI implementation.
-                </p>
-                <a href="https://calendly.com/aidynamicpro" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#B829DD] rounded-xl text-white font-semibold hover:opacity-90 transition glow-blue">
-                    <i class="fas fa-calendar-check mr-2"></i>Book Free Consultation
-                </a>
-            </div>
-        </div>
-    </section>
+  <!-- Values -->
+  <section class="section" style="background:rgba(255,255,255,0.01);">
+    <div class="section-header">
+      <span class="section-label">Our Philosophy</span>
+      <h2>How We Work</h2>
+      <p class="section-desc">Three principles that guide every project we take on.</p>
+    </div>
+    
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <h3>Results First</h3>
+        <p>We measure success by your bottom line. If it doesn't make you money or save you time, we don't build it.</p>
+      </div>
+      
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <h3>Fast Deployment</h3>
+        <p>Most projects go live in 14 days. Not months. We use proven components, not custom everything.</p>
+      </div>
+      
+      <div class="value-card">
+        <div class="value-icon">🔒</div>
+        <h3>Full Ownership</h3>
+        <p>You own everything we build. No vendor lock-in. No proprietary black boxes. Full source code delivered.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="glass border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00D4FF] to-[#B829DD] flex items-center justify-center">
-                            <i class="fas fa-robot text-white text-sm"></i>
-                        </div>
-                        <span class="font-bold text-xl text-white">AI Dynamics Pro</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Building intelligent solutions for businesses since 2020.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="website-agents.html" class="hover:text-[#00D4FF] transition">Website Agents</a></li>
-                        <li><a href="automation.html" class="hover:text-[#00D4FF] transition">Process Automation</a></li>
-                        <li><a href="chatbots.html" class="hover:text-[#00D4FF] transition">Intelligent Chatbots</a></li>
-                        <li><a href="consulting.html" class="hover:text-[#00D4FF] transition">AI Consulting</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4">Contact</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><i class="fas fa-envelope mr-2"></i>hello@aidynamic.pro</li>
-                        <li><i class="fas fa-globe mr-2"></i>aidynamic.pro</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4">Legal</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-white transition">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/10 mt-8 pt-8 text-center">
-                <p class="text-gray-500 text-sm">&copy; 2026 AI Dynamics Pro. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <!-- CTA -->
+  <section class="section" style="text-align:center;">
+    <h2 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1rem;">Work With Us</h2>
+    <p style="color:var(--text-secondary);max-width:450px;margin:0 auto 2rem;">
+      Book a free strategy call. We'll audit your setup and show you exactly where AI can make the biggest impact.
+    </p>
+    <a href="index.html#appointments" class="btn-primary" style="padding:0.9rem 2rem;background:var(--accent-gradient);border:none;border-radius:50px;color:white;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s;">
+      Book Your Free Call →
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">AI Dynamic Pro</div>
+    <ul class="footer-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="founders.html">Founders</a></li>
+      <li><a href="index.html#appointments">Book Call</a></li>
+    </ul>
+    <p style="margin-top:1rem;">© 2026 AI Dynamic Pro. All rights reserved.</p>
+    <p style="font-size:0.75rem;margin-top:0.5rem;">Built with ❤️ in Miami, FL</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
