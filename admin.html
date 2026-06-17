@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Review Queue — AIDynamic.pro</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/dashboard.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --midnight: #0a0e1a;
+            --deep-blue: #0f1729;
+            --electric: #3b82f6;
+            --electric-glow: rgba(59, 130, 246, 0.3);
+            --cyan: #06b6d4;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-medium: rgba(255,255,255,0.1);
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background: var(--midnight);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+        /* ── PIN Gate ── */
+        .pin-gate {
+            position: fixed; inset: 0; background: var(--midnight); z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .pin-box {
+            background: var(--deep-blue);
+            border: 1.5px solid var(--border-medium);
+            padding: 48px; border-radius: 16px; text-align: center;
+            max-width: 400px; width: 90%;
+        }
+        .pin-icon {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: rgba(59,130,246,0.1); border: 1.5px solid rgba(59,130,246,0.3);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px; font-size: 28px; color: var(--electric);
+        }
+        .pin-input {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border-medium);
+            color: #fff; font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px; letter-spacing: 8px;
+            padding: 14px 20px; border-radius: 10px;
+            text-align: center; width: 100%; outline: none;
+            transition: border-color 0.2s;
+        }
+        .pin-input:focus { border-color: var(--electric); }
+        .pin-error { color: #FF4757; font-size: 13px; margin-top: 12px; display: none; }
+
+        /* ── Admin Nav ── */
+        .admin-nav {
+            background: rgba(15, 23, 41, 0.9);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 14px 28px;
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: blur(12px);
+        }
+
+        /* ── Stats ── */
+        .admin-stat {
+            background: var(--deep-blue);
+            border: 1.5px solid var(--border-medium);
+            border-radius: 12px; padding: 24px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .admin-stat::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--electric-glow), transparent);
+        }
+        .admin-stat:hover { border-color: rgba(59,130,246,0.25); }
+        .admin-stat .icon-box {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 14px;
+        }
+        .admin-stat .value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.25rem; font-weight: 700;
+        }
+        .admin-stat .label {
+            font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-muted); margin-top: 6px;
+        }
+
+        /* ── Cards ── */
+        .admin-card {
+            background: var(--deep-blue);
+            border: 1.5px solid var(--border-medium);
+            border-radius: 12px; overflow: hidden;
+        }
+        .admin-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .admin-card-body { padding: 0; }
+
+        /* ── Filter Tabs ── */
+        .filter-tab {
+            padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 500;
+            cursor: pointer; border: 1px solid var(--border-medium);
+            background: transparent; color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .filter-tab:hover { border-color: var(--border-medium); color: #fff; }
+        .filter-tab.active {
+            background: rgba(59,130,246,0.1);
+            border-color: rgba(59,130,246,0.4);
+            color: var(--electric);
+        }
+
+        /* ── Search ── */
+        .search-box {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border-medium);
+            color: #fff; font-size: 14px;
+            padding: 8px 14px 8px 40px; border-radius: 8px; outline: none;
+            transition: border-color 0.2s; width: 100%;
+        }
+        .search-box:focus { border-color: var(--electric); }
+        .search-box::placeholder { color: var(--text-muted); }
+
+        /* ── Table ── */
+        .lead-table { width: 100%; border-collapse: collapse; }
+        .lead-table thead th {
+            font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-muted); text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1.5px solid var(--border-medium);
+            font-weight: 600; white-space: nowrap;
+        }
+        .lead-table tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 14px; vertical-align: middle;
+        }
+        .lead-table tbody tr:hover { background: rgba(59,130,246,0.03); }
+        .lead-table tbody tr.selected { background: rgba(59,130,246,0.06); }
+        .lead-table tbody tr:last-child td { border-bottom: none; }
+
+        /* ── Status ── */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 6px; font-size: 12px;
+            font-weight: 600; border: 1.5px solid;
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+            cursor: pointer; border: 1.5px solid; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn-sm { padding: 5px 10px; font-size: 11px; }
+        .btn-view { color: var(--electric); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
+        .btn-view:hover { background: rgba(59,130,246,0.15); }
+        .btn-contact { color: var(--cyan); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.08); }
+        .btn-contact:hover { background: rgba(6,182,212,0.15); }
+        .btn-qualify { color: #00FF88; border-color: rgba(0,255,136,0.3); background: rgba(0,255,136,0.08); }
+        .btn-qualify:hover { background: rgba(0,255,136,0.15); }
+        .btn-convert { color: #8b5cf6; border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08); }
+        .btn-convert:hover { background: rgba(139,92,246,0.15); }
+        .btn-lost { color: #FF4757; border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.08); }
+        .btn-lost:hover { background: rgba(255,71,87,0.15); }
+        .btn-ghost { color: var(--text-muted); border-color: var(--border-medium); background: transparent; }
+        .btn-ghost:hover { color: #fff; border-color: var(--border-medium); background: rgba(255,255,255,0.03); }
+
+        /* ── Checkbox ── */
+        .chk { width: 16px; height: 16px; accent-color: var(--electric); cursor: pointer; }
+
+        /* ── Bulk Bar ── */
+        .bulk-bar {
+            background: rgba(59,130,246,0.06);
+            border: 1.5px solid rgba(59,130,246,0.2);
+            padding: 12px 20px;
+            display: none; align-items: center; gap: 12px;
+        }
+        .bulk-bar.active { display: flex; }
+
+        /* ── Loading ── */
+        .loading-overlay {
+            display: flex; align-items: center; justify-content: center;
+            padding: 60px 20px;
+        }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid rgba(255,255,255,0.06);
+            border-top-color: var(--electric);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+
+        /* ── Empty ── */
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state i { font-size: 48px; color: var(--text-muted); opacity: 0.3; margin-bottom: 16px; }
+        .empty-state p { color: var(--text-muted); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .admin-nav { padding: 12px 16px; }
+            .lead-table { display: block; overflow-x: auto; white-space: nowrap; }
+            .admin-stat .value { font-size: 1.75rem; }
+            .admin-card-header { flex-direction: column; align-items: flex-start; }
+            .bulk-bar { flex-wrap: wrap; }
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fade-in { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ PIN AUTH GATE ═══════ -->
+<div class="pin-gate" id="pinGate">
+    <div class="pin-box">
+        <div class="pin-icon"><i class="fas fa-lock"></i></div>
+        <h2 class="text-white font-bold text-xl mb-2">Admin Access</h2>
+        <p class="text-sm mb-6" style="color: var(--text-muted);">Enter admin PIN to access the lead review queue</p>
+        <input type="password" class="pin-input" id="pinInput" placeholder="\u2022\u2022\u2022\u2022" maxlength="10"
+            onkeypress="if(event.key==='Enter')checkPin()">
+        <p class="pin-error" id="pinError"><i class="fas fa-exclamation-circle mr-1"></i> Incorrect PIN</p>
+        <button onclick="checkPin()" class="btn btn-view w-full mt-4 justify-center" style="padding:12px;font-size:14px;">
+            <i class="fas fa-unlock"></i> Access Dashboard
+        </button>
+        <a href="index.html" class="text-sm mt-4 inline-block hover:text-white transition" style="color: var(--text-muted);">
+            <i class="fas fa-arrow-left mr-1"></i> Back to Website
+        </a>
+    </div>
+</div>
+
+<!-- ═══════ ADMIN DASHBOARD ═══════ -->
+<div id="adminDashboard" style="display:none;">
+
+    <!-- Top Bar -->
+    <div class="admin-nav">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="AIDynamic" class="h-8 w-auto">
+                <div>
+                    <span class="font-bold text-white text-lg">AIDynamic</span>
+                    <span class="text-xs ml-2" style="color: var(--text-muted); font-family:'Space Grotesk',sans-serif;">ADMIN / REVIEW QUEUE</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm hidden sm:inline transition" style="color: var(--text-muted);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">
+                    <i class="fas fa-arrow-left mr-1"></i> View Website
+                </a>
+                <button onclick="adminAuth.logout(); location.reload();" class="btn btn-ghost btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ═══════ STATS ROW ═══════ -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+            <div class="admin-stat">
+                <div class="icon-box" style="background:rgba(59,130,246,0.1);color:var(--electric);">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="value" style="color:var(--electric);" id="statNewLeads">0</div>
+                <div class="label">New Leads</div>
+            </div>
+            <div class="admin-stat">
+                <div class="icon-box" style="background:rgba(0,255,136,0.1);color:#00FF88;">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="value" style="color:#00FF88;" id="statActiveProjects">0</div>
+                <div class="label">Active Projects</div>
+            </div>
+            <div class="admin-stat">
+                <div class="icon-box" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="value" style="color:#8b5cf6;" id="statTotalClients">0</div>
+                <div class="label">Total Clients</div>
+            </div>
+            <div class="admin-stat">
+                <div class="icon-box" style="background:rgba(6,182,212,0.1);color:var(--cyan);">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="value" style="color:var(--cyan);" id="statConsultationsWeek">0</div>
+                <div class="label">This Week</div>
+            </div>
+        </div>
+
+        <!-- ═══════ LEAD QUEUE CARD ═══════ -->
+        <div class="admin-card fade-in">
+            <div class="admin-card-header">
+                <div>
+                    <h2 class="text-white font-bold text-lg">Lead Review Queue</h2>
+                    <p class="text-sm mt-1" style="color: var(--text-muted);">Review, qualify, and convert incoming leads</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="refreshData()" class="btn btn-ghost btn-sm" title="Refresh">
+                        <i class="fas fa-sync-alt" id="refreshIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters & Search -->
+            <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle);">
+                <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="text-sm" style="color: var(--text-muted);">Status:</span>
+                    <button class="filter-tab active" onclick="filterLeads('all', this)">All</button>
+                    <button class="filter-tab" onclick="filterLeads('new', this)">New</button>
+                    <button class="filter-tab" onclick="filterLeads('contacted', this)">Contacted</button>
+                    <button class="filter-tab" onclick="filterLeads('qualified', this)">Qualified</button>
+                    <button class="filter-tab" onclick="filterLeads('converted', this)">Converted</button>
+                    <button class="filter-tab" onclick="filterLeads('lost', this)">Lost</button>
+                </div>
+                <div class="flex gap-3">
+                    <div class="relative flex-1 max-w-md">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i>
+                        <input type="text" class="search-box" id="searchInput"
+                            placeholder="Search by name, email, or company..." oninput="debouncedSearch()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Bar -->
+            <div class="bulk-bar" id="bulkBar">
+                <span class="text-sm" style="color: var(--text-secondary);">
+                    <span id="selectedCount">0</span> selected
+                </span>
+                <div class="flex-1"></div>
+                <button class="btn btn-contact btn-sm" onclick="bulkAction('contacted')">
+                    <i class="fas fa-envelope"></i> Mark Contacted
+                </button>
+                <button class="btn btn-qualify btn-sm" onclick="bulkAction('qualified')">
+                    <i class="fas fa-check"></i> Qualify
+                </button>
+                <button class="btn btn-convert btn-sm" onclick="bulkAction('converted')">
+                    <i class="fas fa-arrow-right"></i> Convert
+                </button>
+                <button class="btn btn-lost btn-sm" onclick="bulkAction('lost')">
+                    <i class="fas fa-times"></i> Mark Lost
+                </button>
+            </div>
+
+            <!-- Table -->
+            <div class="admin-card-body" id="leadsContainer">
+                <div class="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   Admin Controller
+   ═══════════════════════════════════════ */
+
+const adminAuth = new AdminAuth('3050');
+const app = new AIDynamicApp({ isAdmin: true, onUpdate: () => renderAll() });
+const toast = new Toast();
+
+let currentFilter = 'all';
+let searchQuery = '';
+let selectedIds = new Set();
+let searchTimeout = null;
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+    if (adminAuth.isAuthenticated()) {
+        unlockDashboard();
+    }
+});
+
+function checkPin() {
+    const input = document.getElementById('pinInput').value;
+    const error = document.getElementById('pinError');
+
+    if (adminAuth.authenticate(input)) {
+        unlockDashboard();
+    } else {
+        error.style.display = 'block';
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+    }
+}
+
+function unlockDashboard() {
+    document.getElementById('pinGate').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = 'block';
+    loadData();
+}
+
+async function loadData() {
+    try {
+        await Promise.all([
+            app.fetchLeads(),
+            app.fetchProjects(),
+            app.fetchBookings()
+        ]);
+        renderAll();
+    } catch (e) {
+        console.error('Load error:', e);
+        toast.show('Failed to load data', 'error');
+    }
+}
+
+async function refreshData() {
+    const icon = document.getElementById('refreshIcon');
+    icon.classList.add('fa-spin');
+    selectedIds.clear();
+    await loadData();
+    icon.classList.remove('fa-spin');
+    toast.show('Data refreshed', 'success');
+}
+
+function renderAll() {
+    renderStats();
+    renderLeads();
+    updateBulkBar();
+}
+
+// ── Stats ──
+function renderStats() {
+    const stats = app.getAdminStats();
+    document.getElementById('statNewLeads').textContent = stats.newLeads;
+    document.getElementById('statActiveProjects').textContent = stats.activeProjects;
+    document.getElementById('statTotalClients').textContent = stats.totalClients;
+    document.getElementById('statConsultationsWeek').textContent = stats.consultationsThisWeek;
+}
+
+// ── Leads ──
+function renderLeads() {
+    const container = document.getElementById('leadsContainer');
+
+    if (app.loading && app.leads.length === 0) {
+        container.innerHTML = '<div class="loading-overlay"><div class="spinner"></div></div>';
+        return;
+    }
+
+    let leads = [...app.leads];
+
+    // Filter
+    if (currentFilter !== 'all') {
+        leads = leads.filter(l => l.status === currentFilter);
+    }
+
+    // Search
+    if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        leads = leads.filter(l =>
+            (l.name || '').toLowerCase().includes(q) ||
+            (l.email || '').toLowerCase().includes(q) ||
+            (l.company || '').toLowerCase().includes(q)
+        );
+    }
+
+    if (leads.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <p>No leads found. ${searchQuery ? 'Try a different search.' : 'New leads will appear here.'}</p>
+            </div>`;
+        return;
+    }
+
+    const rows = leads.map(l => {
+        const statusColor = AIDynamicApp.statusColor(l.status);
+        const isSelected = selectedIds.has(l.id);
+        return `
+        <tr class="${isSelected ? 'selected' : ''}">
+            <td><input type="checkbox" class="chk" ${isSelected ? 'checked' : ''} onchange="toggleSelect('${l.id}')"></td>
+            <td data-label="Name">
+                <div class="font-medium text-white">${l.name || 'Unknown'}</div>
+                <div class="text-xs mt-1" style="color:var(--text-muted);">${l.email || ''}</div>
+            </td>
+            <td data-label="Company">${l.company || '-'}</td>
+            <td data-label="Service">${l.service_interest || l.service_type || 'General Inquiry'}</td>
+            <td data-label="Date">${AIDynamicApp.formatDate(l.created_at)}</td>
+            <td data-label="Status">
+                <span class="status-badge" style="color:${statusColor};border-color:${statusColor}33;background:${statusColor}14;">
+                    ${AIDynamicApp.statusLabel(l.status)}
+                </span>
+            </td>
+            <td data-label="Source">
+                <span class="text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.04);color:var(--text-muted);">
+                    ${l.source || 'Contact Form'}
+                </span>
+            </td>
+            <td data-label="Actions">
+                <div class="flex gap-1 flex-wrap">
+                    <button class="btn btn-view btn-sm" onclick="viewLead('${l.id}')" title="View">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn btn-contact btn-sm" onclick="updateStatus('${l.id}', 'contacted')" title="Mark Contacted">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="btn btn-qualify btn-sm" onclick="updateStatus('${l.id}', 'qualified')" title="Qualify">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-convert btn-sm" onclick="updateStatus('${l.id}', 'converted')" title="Convert">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-lost btn-sm" onclick="updateStatus('${l.id}', 'lost')" title="Mark Lost">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>`;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="overflow-x-auto">
+            <table class="lead-table">
+                <thead><tr>
+                    <th style="width:30px;"><input type="checkbox" class="chk" onchange="toggleSelectAll(this)"></th>
+                    <th>Lead</th>
+                    <th>Company</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Source</th>
+                    <th>Actions</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </div>`;
+}
+
+// ── Selection ──
+function toggleSelect(id) {
+    if (selectedIds.has(id)) selectedIds.delete(id);
+    else selectedIds.add(id);
+    renderLeads();
+    updateBulkBar();
+}
+
+function toggleSelectAll(checkbox) {
+    const visibleLeads = getVisibleLeads();
+    if (checkbox.checked) {
+        visibleLeads.forEach(l => selectedIds.add(l.id));
+    } else {
+        visibleLeads.forEach(l => selectedIds.delete(l.id));
+    }
+    renderLeads();
+    updateBulkBar();
+}
+
+function getVisibleLeads() {
+    let leads = [...app.leads];
+    if (currentFilter !== 'all') leads = leads.filter(l => l.status === currentFilter);
+    if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        leads = leads.filter(l =>
+            (l.name || '').toLowerCase().includes(q) ||
+            (l.email || '').toLowerCase().includes(q) ||
+            (l.company || '').toLowerCase().includes(q)
+        );
+    }
+    return leads;
+}
+
+function updateBulkBar() {
+    const bar = document.getElementById('bulkBar');
+    const count = document.getElementById('selectedCount');
+    if (selectedIds.size > 0) {
+        bar.classList.add('active');
+        count.textContent = selectedIds.size;
+    } else {
+        bar.classList.remove('active');
+    }
+}
+
+// ── Filters ──
+function filterLeads(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedIds.clear();
+    renderLeads();
+    updateBulkBar();
+}
+
+function debouncedSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        searchQuery = document.getElementById('searchInput').value.trim();
+        selectedIds.clear();
+        renderLeads();
+        updateBulkBar();
+    }, 300);
+}
+
+// ── Actions ──
+async function updateStatus(id, status) {
+    try {
+        await app.updateLeadStatus(id, status);
+        toast.show(`Lead marked as ${AIDynamicApp.statusLabel(status)}`, 'success');
+        renderAll();
+    } catch (e) {
+        toast.show('Failed: ' + e.message, 'error');
+    }
+}
+
+async function bulkAction(status) {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    try {
+        await app.bulkUpdateLeads(ids, status);
+        selectedIds.clear();
+        toast.show(`${ids.length} leads marked as ${AIDynamicApp.statusLabel(status)}`, 'success');
+        renderAll();
+    } catch (e) {
+        toast.show('Bulk update failed: ' + e.message, 'error');
+    }
+}
+
+function viewLead(id) {
+    const lead = app.leads.find(l => l.id === id);
+    if (!lead) return;
+
+    const modal = new Modal({ id: 'leadModal' });
+    const content = document.createElement('div');
+    const statusColor = AIDynamicApp.statusColor(lead.status);
+
+    content.innerHTML = `
+        <div class="space-y-4">
+            <div class="flex items-start gap-4">
+                <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--electric),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;flex-shrink:0;">
+                    ${(lead.name || '?').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                    <div class="text-white font-bold text-lg">${lead.name || 'Unknown'}</div>
+                    <div class="text-sm" style="color:var(--text-muted);">${lead.email || 'No email'}</div>
+                </div>
+            </div>
+
+            <div style="height:1px;background:var(--border-subtle);"></div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Company</label>
+                    <div class="text-white mt-1">${lead.company || 'Not provided'}</div>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Status</label>
+                    <div class="mt-1">
+                        <span class="status-badge" style="color:${statusColor};border-color:${statusColor}33;background:${statusColor}14;">
+                            ${AIDynamicApp.statusLabel(lead.status)}
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Service Interest</label>
+                    <div class="text-white mt-1">${lead.service_interest || lead.service_type || 'General Inquiry'}</div>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Source</label>
+                    <div class="text-white mt-1">${lead.source || 'Contact Form'}</div>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Submitted</label>
+                    <div class="text-white mt-1">${AIDynamicApp.formatDateTime(lead.created_at)}</div>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Phone</label>
+                    <div class="text-white mt-1">${lead.phone || 'Not provided'}</div>
+                </div>
+            </div>
+
+            ${lead.message ? `
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Message</label>
+                <div class="text-white mt-1 text-sm leading-relaxed p-3 rounded-lg" style="background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);">
+                    ${lead.message}
+                </div>
+            </div>` : ''}
+
+            ${lead.notes ? `
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Internal Notes</label>
+                <div class="text-white mt-1 text-sm">${lead.notes}</div>
+            </div>` : ''}
+
+            <div style="height:1px;background:var(--border-subtle);"></div>
+
+            <div class="flex flex-wrap gap-2">
+                <a href="mailto:${lead.email}" class="btn btn-contact" style="text-decoration:none;">
+                    <i class="fas fa-envelope"></i> Email Lead
+                </a>
+                <button class="btn btn-qualify" onclick="updateStatus('${lead.id}', 'qualified'); modal.close();">
+                    <i class="fas fa-check"></i> Qualify
+                </button>
+                <button class="btn btn-convert" onclick="updateStatus('${lead.id}', 'converted'); modal.close();">
+                    <i class="fas fa-arrow-right"></i> Convert
+                </button>
+                <button class="btn btn-lost" onclick="updateStatus('${lead.id}', 'lost'); modal.close();">
+                    <i class="fas fa-times"></i> Mark Lost
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Wire up modal close reference for inline onclick handlers
+    content.querySelectorAll('button').forEach(btn => {
+        if (btn.getAttribute('onclick')?.includes('modal.close()')) {
+            const original = btn.getAttribute('onclick');
+            btn.setAttribute('onclick', original.replace('modal.close()', `document.querySelector('#leadModal').style.display='none';document.body.style.overflow=''`));
+        }
+    });
+
+    modal.open(lead.name || 'Lead Details', content);
+}
+</script>
+
+</body>
+</html>

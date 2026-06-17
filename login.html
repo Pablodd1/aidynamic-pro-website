@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In — AI Dynamic Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="logo-option-1.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0a0e1a',
+                        'deep-blue': '#0f1729',
+                        electric: '#3b82f6',
+                        cyan: '#06b6d4',
+                        'soft-white': '#e2e8f0',
+                        muted: '#94a3b8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; min-height: 100vh; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #0f1729 50%, #0a0e1a 100%);
+        }
+
+        .floating-card {
+            background: #0f1729;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(20px);
+        }
+
+        .tech-input {
+            background: rgba(15, 23, 41, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            width: 100%;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .tech-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .tech-input::placeholder { color: #64748b; }
+
+        .tech-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        .tech-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
+        }
+        .tech-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .step-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+        .step-dot.active {
+            background: #3b82f6;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+        }
+        .step-dot.completed { background: #3b82f6; }
+        .step-line {
+            height: 2px;
+            background: rgba(148, 163, 184, 0.15);
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        .step-line.completed { background: #3b82f6; }
+
+        .hidden { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+
+        .error-msg { color: #ef4444; font-size: 0.875rem; margin-top: 0.5rem; }
+        .success-msg { color: #06b6d4; font-size: 0.875rem; margin-top: 0.5rem; }
+
+        /* Subtle grid background */
+        .grid-bg::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .logo-glow {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="gradient-bg grid-bg">
+    <!-- Navigation -->
+    <nav class="relative z-10 w-full border-b border-[#3b82f6]/10 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+                    <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#3b82f6"/>
+                            <stop offset="1" stop-color="#06b6d4"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="font-display font-bold text-lg logo-glow">AI Dynamic Pro</span>
+            </a>
+            <a href="/" class="text-[#94a3b8] hover:text-[#e2e8f0] transition text-sm flex items-center gap-2">
+                <i class="fas fa-arrow-left text-xs"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 min-h-[80vh] flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md">
+            <!-- Progress Steps -->
+            <div class="flex items-center justify-center gap-4 mb-10">
+                <div class="step-dot active" id="step1-dot"></div>
+                <div class="step-line" id="step1-line"></div>
+                <div class="step-dot" id="step2-dot"></div>
+            </div>
+
+            <!-- Step 1: Email Input -->
+            <div id="step1" class="fade-in">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-display font-bold mb-2">Welcome Back</h1>
+                    <p class="text-[#94a3b8]">Log in to access your AI services dashboard</p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="mb-6">
+                            <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                class="tech-input"
+                                placeholder="you@company.com"
+                                required
+                            >
+                            <div id="email-error" class="error-msg hidden"></div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="tech-btn">
+                            <span id="btnText">Send Magic Link</span>
+                            <span id="btnLoading" class="hidden">
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Sending...
+                            </span>
+                        </button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-[#64748b] text-sm">
+                            Don't have an account?
+                            <a href="/signup.html" class="text-[#3b82f6] hover:text-[#06b6d4] transition font-medium">Get Started</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="mt-6 p-5 rounded-2xl bg-[#0f1729] border border-[#3b82f6]/10">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-[#3b82f6]/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-shield-alt text-[#3b82f6]"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-[#e2e8f0]">Passwordless Login</p>
+                            <p class="text-xs text-[#64748b] mt-1 leading-relaxed">
+                                We use secure magic links sent to your email. No passwords to remember, no accounts to hack.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Check Email -->
+            <div id="step2" class="hidden fade-in">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 rounded-full bg-[#3b82f6]/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-3xl text-[#3b82f6]"></i>
+                    </div>
+                    <h1 class="text-2xl font-display font-bold mb-2">Check Your Email</h1>
+                    <p class="text-[#94a3b8]">
+                        We sent a magic link to<br>
+                        <strong id="sentEmail" class="text-[#e2e8f0]"></strong>
+                    </p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-inbox text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">Open your email inbox</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-mouse-pointer text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">Click the magic link</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-check-circle text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">You're logged in automatically</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-[#3b82f6]/10">
+                        <p class="text-center text-sm text-[#64748b] mb-4">
+                            Didn't receive it? Check spam or try again.
+                        </p>
+                        <button onclick="resetForm()" class="w-full py-3 rounded-[50px] border border-[#3b82f6]/20 text-[#e2e8f0] hover:bg-[#3b82f6]/5 transition text-sm font-medium">
+                            Try Different Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: OTP Verification (for manual code entry) -->
+            <div id="step3" class="hidden fade-in">
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl font-display font-bold mb-2">Enter Verification Code</h1>
+                    <p class="text-[#94a3b8]">Paste the code from your email</p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <form id="otpForm" onsubmit="handleOTP(event)">
+                        <div class="mb-6">
+                            <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">6-Digit Code</label>
+                            <input
+                                type="text"
+                                id="otpCode"
+                                class="tech-input text-center text-2xl tracking-[0.5em] font-display"
+                                placeholder="123456"
+                                maxlength="6"
+                                required
+                            >
+                            <div id="otp-error" class="error-msg hidden"></div>
+                        </div>
+
+                        <button type="submit" id="otpBtn" class="tech-btn">
+                            <span id="otpBtnText">Verify & Log In</span>
+                            <span id="otpBtnLoading" class="hidden">
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Verifying...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-[#3b82f6]/10 py-6 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-xs text-[#64748b]">© 2026 AI Dynamic Pro — ALL RIGHTS RESERVED</span>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { AuthManager } from './js/auth.js';
+
+        const auth = new AuthManager();
+        let currentEmail = '';
+
+        // Check if already logged in
+        await auth.init();
+        if (auth.isAuthenticated()) {
+            window.location.href = '/dashboard.html';
+        }
+
+        // Handle login form
+        window.handleLogin = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const errorEl = document.getElementById('email-error');
+
+            // Reset error
+            errorEl.classList.add('hidden');
+            errorEl.textContent = '';
+
+            // Validate
+            if (!email || !email.includes('@')) {
+                errorEl.textContent = 'Please enter a valid email address';
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            // Loading state
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+
+            try {
+                await auth.sendMagicLink(email);
+                currentEmail = email;
+
+                // Show step 2
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+                document.getElementById('sentEmail').textContent = email;
+
+                // Update progress
+                document.getElementById('step1-dot').classList.add('completed');
+                document.getElementById('step1-line').classList.add('completed');
+                document.getElementById('step2-dot').classList.add('active');
+
+            } catch (err) {
+                errorEl.textContent = err.message || 'Failed to send magic link. Please try again.';
+                errorEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        };
+
+        // Handle OTP verification
+        window.handleOTP = async (e) => {
+            e.preventDefault();
+            const code = document.getElementById('otpCode').value.trim();
+            const btn = document.getElementById('otpBtn');
+            const btnText = document.getElementById('otpBtnText');
+            const btnLoading = document.getElementById('otpBtnLoading');
+            const errorEl = document.getElementById('otp-error');
+
+            errorEl.classList.add('hidden');
+
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+
+            try {
+                await auth.verifyOTP(currentEmail, code);
+                window.location.href = '/dashboard.html';
+            } catch (err) {
+                errorEl.textContent = err.message || 'Invalid code. Please try again.';
+                errorEl.classList.remove('hidden');
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        };
+
+        // Reset form
+        window.resetForm = () => {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            document.getElementById('email').value = '';
+            document.getElementById('step1-dot').classList.remove('completed');
+            document.getElementById('step1-line').classList.remove('completed');
+            document.getElementById('step2-dot').classList.remove('active');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started — AI Dynamic Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="logo-option-1.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0a0e1a',
+                        'deep-blue': '#0f1729',
+                        electric: '#3b82f6',
+                        cyan: '#06b6d4',
+                        'soft-white': '#e2e8f0',
+                        muted: '#94a3b8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; min-height: 100vh; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #0f1729 50%, #0a0e1a 100%);
+        }
+
+        .floating-card {
+            background: #0f1729;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(20px);
+        }
+
+        .tech-input {
+            background: rgba(15, 23, 41, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            width: 100%;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .tech-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .tech-input::placeholder { color: #64748b; }
+
+        select.tech-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+        }
+        option { background: #0f1729; color: #e2e8f0; }
+
+        .tech-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        .tech-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
+        }
+        .tech-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .tech-btn-outline {
+            background: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #e2e8f0;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .tech-btn-outline:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-color: #3b82f6;
+        }
+
+        .step-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+        .step-dot.active {
+            background: #3b82f6;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+        }
+        .step-dot.completed { background: #3b82f6; }
+        .step-line {
+            height: 2px;
+            background: rgba(148, 163, 184, 0.15);
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        .step-line.completed { background: #3b82f6; }
+
+        .hidden { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+
+        .error-msg { color: #ef4444; font-size: 0.875rem; margin-top: 0.5rem; }
+        .success-msg { color: #06b6d4; font-size: 0.875rem; margin-top: 0.5rem; }
+
+        .radio-card {
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 41, 0.5);
+        }
+        .radio-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(59, 130, 246, 0.03);
+        }
+        .radio-card.selected {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.06);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Subtle grid background */
+        .grid-bg::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .logo-glow {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 6px;
+            background: rgba(15, 23, 41, 0.8);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-color: transparent;
+        }
+        input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="gradient-bg grid-bg">
+    <!-- Navigation -->
+    <nav class="relative z-10 w-full border-b border-[#3b82f6]/10 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+                    <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#3b82f6"/>
+                            <stop offset="1" stop-color="#06b6d4"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="font-display font-bold text-lg logo-glow">AI Dynamic Pro</span>
+            </a>
+            <a href="/" class="text-[#94a3b8] hover:text-[#e2e8f0] transition text-sm flex items-center gap-2">
+                <i class="fas fa-arrow-left text-xs"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 min-h-[80vh] flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-lg">
+            <!-- Progress Steps -->
+            <div class="flex items-center justify-center gap-4 mb-10">
+                <div class="step-dot active" id="step1-dot"></div>
+                <div class="step-line" id="step1-line"></div>
+                <div class="step-dot" id="step2-dot"></div>
+                <div class="step-line" id="step2-line"></div>
+                <div class="step-dot" id="step3-dot"></div>
+            </div>
+
+            <!-- Step 1: Account Type -->
+            <div id="step1" class="fade-in">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-display font-bold mb-2">Join AI Dynamic Pro</h1>
+                    <p class="text-[#94a3b8]">Create your account in under 2 minutes</p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <p class="text-xs font-display font-semibold text-[#64748b] mb-4 uppercase tracking-widest">I want to...</p>
+
+                    <div class="space-y-4 mb-6">
+                        <div class="radio-card selected" onclick="selectRole('client', this)" id="role-client">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3b82f6]/20 to-[#06b6d4]/20 flex items-center justify-center">
+                                    <i class="fas fa-rocket text-[#3b82f6] text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-[#e2e8f0]">Hire AI Services</h3>
+                                    <p class="text-sm text-[#64748b]">Access AI consulting, automation, and deployment services</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="radio-card" onclick="selectRole('admin', this)" id="role-admin">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8b5cf6]/20 to-[#3b82f6]/20 flex items-center justify-center">
+                                    <i class="fas fa-crown text-[#8b5cf6] text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-[#e2e8f0]">I'm Part of the Team</h3>
+                                    <p class="text-sm text-[#64748b]">Internal team access for managing projects and clients</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="goToStep(2)" class="tech-btn">
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Profile Info -->
+            <div id="step2" class="hidden fade-in">
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl font-display font-bold mb-2">Tell Us About Yourself</h1>
+                    <p class="text-[#94a3b8]">This helps us personalize your experience</p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <form id="signupForm" onsubmit="handleSignup(event)">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">Full Name</label>
+                                <input type="text" id="fullName" class="tech-input" placeholder="John Smith" required>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">Email Address</label>
+                                <input type="email" id="email" class="tech-input" placeholder="john@company.com" required>
+                                <div id="email-error" class="error-msg hidden"></div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">Phone Number</label>
+                                <input type="tel" id="phone" class="tech-input" placeholder="(305) 555-0123">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">Company Name (Optional)</label>
+                                <input type="text" id="company" class="tech-input" placeholder="Acme Corp">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display font-semibold text-[#64748b] mb-2 uppercase tracking-widest">How did you hear about us? (Optional)</label>
+                                <select id="source" class="tech-input">
+                                    <option value="">Select an option</option>
+                                    <option value="search">Google Search</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="referral">Referral</option>
+                                    <option value="event">Event / Conference</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-start gap-3">
+                            <input type="checkbox" id="terms" class="mt-1" required>
+                            <label for="terms" class="text-sm text-[#64748b] leading-relaxed">
+                                I agree to the <a href="/terms.html" class="text-[#3b82f6] hover:text-[#06b6d4] transition">Terms of Service</a> and
+                                <a href="/privacy.html" class="text-[#3b82f6] hover:text-[#06b6d4] transition">Privacy Policy</a>.
+                                I understand that AI Dynamic Pro provides AI consulting and automation services.
+                            </label>
+                        </div>
+
+                        <div class="mt-6 flex gap-3">
+                            <button type="button" onclick="goToStep(1)" class="flex-1 tech-btn-outline">
+                                ← Back
+                            </button>
+                            <button type="submit" id="submitBtn" class="flex-[2] tech-btn">
+                                <span id="btnText">Create Account</span>
+                                <span id="btnLoading" class="hidden">
+                                    <i class="fas fa-spinner fa-spin mr-2"></i> Creating...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 3: Check Email -->
+            <div id="step3" class="hidden fade-in">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#3b82f6]/15 to-[#06b6d4]/15 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope-open-text text-3xl text-[#3b82f6]"></i>
+                    </div>
+                    <h1 class="text-2xl font-display font-bold mb-2">Almost There!</h1>
+                    <p class="text-[#94a3b8]">
+                        We sent a magic link to<br>
+                        <strong id="sentEmail" class="text-[#e2e8f0]"></strong>
+                    </p>
+                </div>
+
+                <div class="floating-card rounded-2xl p-8">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-inbox text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">Check your email inbox</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-mouse-pointer text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">Click the magic link to verify</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 rounded-xl bg-[#0a0e1a] border border-[#3b82f6]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center">
+                                <i class="fas fa-rocket text-[#3b82f6] text-sm"></i>
+                            </div>
+                            <span class="text-sm text-[#e2e8f0]">Start using AI Dynamic Pro</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-[#3b82f6]/10">
+                        <p class="text-center text-sm text-[#64748b] mb-4">
+                            Didn't receive it? Check spam or try again.
+                        </p>
+                        <button onclick="resetForm()" class="w-full py-3 rounded-[50px] border border-[#3b82f6]/20 text-[#e2e8f0] hover:bg-[#3b82f6]/5 transition text-sm font-medium">
+                            Try Different Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-[#3b82f6]/10 py-6 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-xs text-[#64748b]">© 2026 AI Dynamic Pro — ALL RIGHTS RESERVED</span>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { AuthManager } from './js/auth.js';
+
+        const auth = new AuthManager();
+        let selectedRole = 'client';
+        let formData = {};
+
+        // Check if already logged in
+        await auth.init();
+        if (auth.isAuthenticated()) {
+            window.location.href = '/dashboard.html';
+        }
+
+        // Role selection
+        window.selectRole = (role, el) => {
+            selectedRole = role;
+            document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
+            el.classList.add('selected');
+        };
+
+        // Step navigation
+        window.goToStep = (step) => {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.add('hidden');
+
+            document.getElementById(`step${step}`).classList.remove('hidden');
+
+            // Update progress
+            if (step === 1) {
+                document.getElementById('step1-dot').className = 'step-dot active';
+                document.getElementById('step1-line').className = 'step-line';
+                document.getElementById('step2-dot').className = 'step-dot';
+                document.getElementById('step2-line').className = 'step-line';
+                document.getElementById('step3-dot').className = 'step-dot';
+            } else if (step === 2) {
+                document.getElementById('step1-dot').className = 'step-dot completed';
+                document.getElementById('step1-line').className = 'step-line completed';
+                document.getElementById('step2-dot').className = 'step-dot active';
+            }
+        };
+
+        // Handle signup
+        window.handleSignup = async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const source = document.getElementById('source').value;
+
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const errorEl = document.getElementById('email-error');
+
+            errorEl.classList.add('hidden');
+
+            // Validate
+            if (!email.includes('@')) {
+                errorEl.textContent = 'Please enter a valid email address';
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+
+            try {
+                // Store profile data for later (used by ensureProfile after OTP verify)
+                formData = {
+                    email,
+                    full_name: fullName,
+                    phone,
+                    company_name: company,
+                    role: selectedRole,
+                    source: source || null
+                };
+
+                // Store in localStorage for after verification
+                localStorage.setItem('aidynamic-pending-profile', JSON.stringify(formData));
+
+                // Send magic link
+                await auth.sendMagicLink(email);
+
+                // Show step 3
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('step3').classList.remove('hidden');
+                document.getElementById('sentEmail').textContent = email;
+
+                // Update progress
+                document.getElementById('step2-dot').className = 'step-dot completed';
+                document.getElementById('step2-line').className = 'step-line completed';
+                document.getElementById('step3-dot').className = 'step-dot active';
+
+            } catch (err) {
+                errorEl.textContent = err.message || 'Failed to create account. Please try again.';
+                errorEl.classList.remove('hidden');
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        };
+
+        // Reset form
+        window.resetForm = () => {
+            localStorage.removeItem('aidynamic-pending-profile');
+            goToStep(1);
+            document.getElementById('email').value = '';
+            document.getElementById('fullName').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('company').value = '';
+            document.getElementById('source').value = '';
+        };
+    </script>
+</body>
+</html>

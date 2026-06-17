@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard — AIDynamic.pro</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/dashboard.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --midnight: #0a0e1a;
+            --deep-blue: #0f1729;
+            --electric: #3b82f6;
+            --electric-glow: rgba(59, 130, 246, 0.3);
+            --cyan: #06b6d4;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-medium: rgba(255,255,255,0.1);
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background: var(--midnight);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px; min-height: 100vh;
+            background: var(--deep-blue);
+            border-right: 1.5px solid var(--border-medium);
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: transform 0.3s ease;
+            display: flex; flex-direction: column;
+        }
+        .sidebar.closed { transform: translateX(-100%); }
+
+        .sidebar-logo {
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .sidebar-logo img { height: 32px; width: auto; }
+        .sidebar-logo .brand { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: #fff; }
+        .sidebar-logo .brand-sub { font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+        .sidebar-nav { flex: 1; padding: 12px 0; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 20px; color: var(--text-secondary);
+            font-size: 14px; font-weight: 500; cursor: pointer;
+            transition: all 0.2s; border-left: 3px solid transparent;
+            text-decoration: none;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(59,130,246,0.06); color: #fff;
+            border-left-color: var(--electric);
+        }
+        .nav-item i { width: 20px; text-align: center; font-size: 15px; }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 12px; color: var(--text-muted);
+        }
+
+        /* ── Main Content ── */
+        .main-content { margin-left: 260px; min-height: 100vh; }
+
+        /* ── Top Bar ── */
+        .topbar {
+            background: rgba(15, 23, 41, 0.8);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 14px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: blur(12px);
+        }
+        .topbar-title { font-size: 1.25rem; font-weight: 700; color: #fff; }
+
+        /* ── Cards ── */
+        .dash-card {
+            background: var(--deep-blue);
+            border: 1.5px solid var(--border-medium);
+            border-radius: 12px; overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .dash-card:hover { border-color: rgba(59,130,246,0.25); }
+        .dash-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .dash-card-body { padding: 24px; }
+
+        /* ── Stats ── */
+        .stat-card {
+            background: var(--deep-blue);
+            border: 1.5px solid var(--border-medium);
+            border-radius: 12px; padding: 24px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .stat-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--electric-glow), transparent);
+        }
+        .stat-card:hover { border-color: rgba(59,130,246,0.25); }
+        .stat-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 14px;
+        }
+        .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; }
+        .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+        /* ── Profile ── */
+        .profile-avatar {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--cyan));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 700; color: white;
+            border: 3px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+        .profile-info { flex: 1; }
+        .profile-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+        .profile-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        /* ── Status Badges ── */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 6px; font-size: 12px;
+            font-weight: 600; border: 1.5px solid;
+        }
+
+        /* ── Progress Bar ── */
+        .progress-track {
+            width: 100%; height: 6px; background: rgba(255,255,255,0.06);
+            border-radius: 3px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, var(--electric), var(--cyan));
+            transition: width 0.6s ease;
+        }
+
+        /* ── Tables ── */
+        .dash-table { width: 100%; border-collapse: collapse; }
+        .dash-table thead th {
+            font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-muted); text-align: left;
+            padding: 12px 16px; border-bottom: 1.5px solid var(--border-medium);
+            font-weight: 600; white-space: nowrap;
+        }
+        .dash-table tbody td {
+            padding: 14px 16px; border-bottom: 1px solid var(--border-subtle);
+            font-size: 14px; vertical-align: middle;
+        }
+        .dash-table tbody tr:hover { background: rgba(59,130,246,0.03); }
+        .dash-table tbody tr:last-child td { border-bottom: none; }
+
+        /* ── Buttons ── */
+        .btn-dash {
+            padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+            cursor: pointer; border: 1.5px solid; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-dash:hover { transform: translateY(-1px); }
+        .btn-primary { color: var(--electric); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
+        .btn-primary:hover { background: rgba(59,130,246,0.15); }
+        .btn-ghost { color: var(--text-muted); border-color: var(--border-medium); background: transparent; }
+        .btn-ghost:hover { color: #fff; border-color: var(--border-medium); background: rgba(255,255,255,0.03); }
+
+        /* ── Loading ── */
+        .loading-overlay {
+            display: flex; align-items: center; justify-content: center;
+            padding: 60px 20px;
+        }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid rgba(255,255,255,0.06);
+            border-top-color: var(--electric);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+
+        /* ── Empty State ── */
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state i { font-size: 48px; color: var(--text-muted); opacity: 0.3; margin-bottom: 16px; }
+        .empty-state p { color: var(--text-muted); font-size: 14px; }
+
+        /* ── Mobile Toggle ── */
+        .mobile-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 5px;
+        }
+        .mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+
+        /* ── Overlay ── */
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 99; backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .mobile-toggle { display: flex; }
+            .topbar { padding: 12px 16px; }
+            .stat-value { font-size: 1.5rem; }
+            .dash-table thead { display: none; }
+            .dash-table tbody td {
+                display: block; padding: 8px 16px;
+                border-bottom: none;
+            }
+            .dash-table tbody tr {
+                display: block; border-bottom: 1px solid var(--border-subtle);
+                padding: 12px 0;
+            }
+            .dash-table tbody td::before {
+                content: attr(data-label);
+                display: block; font-size: 11px; color: var(--text-muted);
+                text-transform: uppercase; letter-spacing: 0.05em;
+                margin-bottom: 4px;
+            }
+        }
+
+        /* ── Animations ── */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fade-in { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <img src="logo.png" alt="AIDynamic">
+        <div>
+            <div class="brand">AIDynamic</div>
+            <div class="brand-sub">Client Portal</div>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="#profile" class="nav-item active" data-section="profile" onclick="showSection('profile')">
+            <i class="fas fa-user"></i> Profile
+        </a>
+        <a href="#projects" class="nav-item" data-section="projects" onclick="showSection('projects')">
+            <i class="fas fa-folder-open"></i> Projects
+        </a>
+        <a href="#bookings" class="nav-item" data-section="bookings" onclick="showSection('bookings')">
+            <i class="fas fa-calendar-check"></i> Bookings
+        </a>
+        <a href="#settings" class="nav-item" data-section="settings" onclick="showSection('settings')">
+            <i class="fas fa-cog"></i> Settings
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <a href="index.html" class="text-xs hover:text-white transition" style="color: var(--text-muted); text-decoration: none;">
+            <i class="fas fa-arrow-left mr-1"></i> Back to Website
+        </a>
+    </div>
+</aside>
+
+<!-- ═══════ MOBILE OVERLAY ═══════ -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- ═══════ MAIN ═══════ -->
+<main class="main-content">
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="flex items-center gap-3">
+            <button class="mobile-toggle" id="mobileToggle" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+            <h1 class="topbar-title">Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-sm hidden sm:inline" style="color: var(--text-muted);">
+                <i class="fas fa-envelope mr-1"></i> <span id="clientEmail">Loading...</span>
+            </span>
+            <button onclick="refreshData()" class="btn-dash btn-ghost btn-sm" title="Refresh">
+                <i class="fas fa-sync-alt" id="refreshIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="p-6 lg:p-8 max-w-7xl mx-auto">
+        <!-- ═══════ STATS ROW ═══════ -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+            <div class="stat-card">
+                <div class="stat-icon" style="background:rgba(59,130,246,0.1);color:var(--electric);">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <div class="stat-value" style="color:var(--electric);" id="statTotal">--</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:rgba(0,255,136,0.1);color:#00FF88;">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="stat-value" style="color:#00FF88;" id="statActive">--</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-value" style="color:#8b5cf6;" id="statCompleted">--</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:rgba(6,182,212,0.1);color:var(--cyan);">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-value" style="color:var(--cyan);" id="statConsultations">--</div>
+                <div class="stat-label">Consultations</div>
+            </div>
+        </div>
+
+        <!-- ═══════ PROFILE SECTION ═══════ -->
+        <section id="section-profile" class="section-content fade-in">
+            <div class="dash-card mb-6">
+                <div class="dash-card-header">
+                    <h2 class="text-white font-bold text-lg">Profile</h2>
+                    <button class="btn-dash btn-primary" onclick="editProfile()">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                </div>
+                <div class="dash-card-body">
+                    <div class="flex flex-col sm:flex-row items-start gap-6">
+                        <div class="profile-avatar" id="profileAvatar">?</div>
+                        <div class="profile-info">
+                            <div class="profile-name" id="profileName">Loading...</div>
+                            <div class="profile-meta" id="profileEmail">...</div>
+                            <div class="profile-meta" id="profileCompany">...</div>
+                            <div class="profile-meta mt-2" id="profileRole">...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ PROJECTS SECTION ═══════ -->
+        <section id="section-projects" class="section-content hidden">
+            <div class="dash-card mb-6">
+                <div class="dash-card-header">
+                    <div>
+                        <h2 class="text-white font-bold text-lg">Projects</h2>
+                        <p class="text-sm mt-1" style="color: var(--text-muted);">Your active and past AI automation projects</p>
+                    </div>
+                </div>
+                <div class="dash-card-body" id="projectsContainer">
+                    <div class="loading-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ BOOKINGS SECTION ═══════ -->
+        <section id="section-bookings" class="section-content hidden">
+            <div class="dash-card mb-6">
+                <div class="dash-card-header">
+                    <div>
+                        <h2 class="text-white font-bold text-lg">Consultation Bookings</h2>
+                        <p class="text-sm mt-1" style="color: var(--text-muted);">Your upcoming and past consultations</p>
+                    </div>
+                </div>
+                <div class="dash-card-body" id="bookingsContainer">
+                    <div class="loading-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ SETTINGS SECTION ═══════ -->
+        <section id="section-settings" class="section-content hidden">
+            <div class="dash-card mb-6">
+                <div class="dash-card-header">
+                    <h2 class="text-white font-bold text-lg">Settings</h2>
+                </div>
+                <div class="dash-card-body">
+                    <div class="space-y-6 max-w-lg">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Email Address</label>
+                            <input type="email" id="settingsEmail" class="w-full px-4 py-3 rounded-lg text-sm"
+                                style="background: rgba(255,255,255,0.04); border: 1.5px solid var(--border-medium); color: #fff; outline: none;"
+                                placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Company Name</label>
+                            <input type="text" id="settingsCompany" class="w-full px-4 py-3 rounded-lg text-sm"
+                                style="background: rgba(255,255,255,0.04); border: 1.5px solid var(--border-medium); color: #fff; outline: none;"
+                                placeholder="Your Company">
+                        </div>
+                        <div class="flex gap-3 pt-2">
+                            <button class="btn-dash btn-primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button class="btn-dash btn-ghost" onclick="resetSettings()">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════
+   Client Dashboard Controller
+   ═══════════════════════════════════════ */
+
+const app = new AIDynamicApp({
+    onUpdate: () => renderAll()
+});
+
+const toast = new Toast();
+let currentSection = 'profile';
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+    initDashboard();
+});
+
+async function initDashboard() {
+    // Try to get email from URL param or localStorage
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email') || localStorage.getItem('aidynamic_client_email') || '';
+    if (email) {
+        app._setStoredEmail(email);
+    }
+
+    // Show email in topbar
+    document.getElementById('clientEmail').textContent = email || 'Not signed in';
+
+    await loadData();
+    renderAll();
+}
+
+async function loadData() {
+    try {
+        await Promise.all([
+            app.fetchProjects(),
+            app.fetchBookings(),
+            app.fetchProfile()
+        ]);
+    } catch (e) {
+        console.error('Load error:', e);
+        toast.show('Failed to load dashboard data', 'error');
+    }
+}
+
+async function refreshData() {
+    const icon = document.getElementById('refreshIcon');
+    icon.classList.add('fa-spin');
+    await loadData();
+    renderAll();
+    icon.classList.remove('fa-spin');
+    toast.show('Dashboard refreshed', 'success');
+}
+
+function renderAll() {
+    renderStats();
+    renderProfile();
+    renderProjects();
+    renderBookings();
+    renderSettings();
+}
+
+// ── Stats ──
+function renderStats() {
+    const stats = app.getClientStats();
+    document.getElementById('statTotal').textContent = stats.totalProjects;
+    document.getElementById('statActive').textContent = stats.active;
+    document.getElementById('statCompleted').textContent = stats.completed;
+    document.getElementById('statConsultations').textContent = stats.consultations;
+}
+
+// ── Profile ──
+function renderProfile() {
+    const p = app.profile || {};
+    const email = app.clientEmail || p.email || '';
+    const name = p.name || email.split('@')[0] || 'Client';
+    const company = p.company || 'Not specified';
+    const role = p.role || 'Business Owner';
+
+    document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
+    document.getElementById('profileName').textContent = name;
+    document.getElementById('profileEmail').innerHTML = `<i class="fas fa-envelope mr-1"></i> ${email || 'No email'}`;
+    document.getElementById('profileCompany').innerHTML = `<i class="fas fa-building mr-1"></i> ${company}`;
+    document.getElementById('profileRole').innerHTML = `<span class="status-badge" style="color:var(--electric);border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);">${role}</span>`;
+}
+
+function editProfile() {
+    toast.show('Profile editing coming soon', 'info');
+}
+
+// ── Projects ──
+function renderProjects() {
+    const container = document.getElementById('projectsContainer');
+    if (app.loading && app.projects.length === 0) {
+        container.innerHTML = '<div class="loading-overlay"><div class="spinner"></div></div>';
+        return;
+    }
+
+    if (app.projects.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>No projects yet. <a href="consulting.html" style="color:var(--electric);">Book a consultation</a> to get started.</p>
+            </div>`;
+        return;
+    }
+
+    const rows = app.projects.map(p => {
+        const statusColor = AIDynamicApp.statusColor(p.status);
+        const progress = p.progress || 0;
+        return `
+        <tr>
+            <td data-label="Project">
+                <div class="font-medium text-white">${p.name || 'Untitled Project'}</div>
+                <div class="text-xs mt-1" style="color:var(--text-muted);">${p.service_type || 'AI Service'}</div>
+            </td>
+            <td data-label="Status">
+                <span class="status-badge" style="color:${statusColor};border-color:${statusColor}33;background:${statusColor}14;">
+                    ${AIDynamicApp.statusLabel(p.status)}
+                </span>
+            </td>
+            <td data-label="Progress">
+                <div class="progress-track" style="max-width: 120px;">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="text-xs mt-1" style="color:var(--text-muted);">${progress}%</div>
+            </td>
+            <td data-label="Start Date">${AIDynamicApp.formatDate(p.start_date || p.created_at)}</td>
+            <td data-label="Actions">
+                <button class="btn-dash btn-ghost btn-sm" onclick="viewProject('${p.id}')">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </td>
+        </tr>`;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="overflow-x-auto">
+            <table class="dash-table">
+                <thead><tr>
+                    <th>Project</th><th>Status</th><th>Progress</th><th>Start Date</th><th></th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </div>`;
+}
+
+function viewProject(id) {
+    const p = app.projects.find(x => x.id === id);
+    if (!p) return;
+
+    const modal = new Modal({ id: 'projectModal' });
+    const content = document.createElement('div');
+    const statusColor = AIDynamicApp.statusColor(p.status);
+    content.innerHTML = `
+        <div class="space-y-4">
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Project Name</label>
+                <div class="text-white font-medium mt-1">${p.name || 'Untitled'}</div>
+            </div>
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Service</label>
+                <div class="text-white mt-1">${p.service_type || 'AI Service'}</div>
+            </div>
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Status</label>
+                <div class="mt-1">
+                    <span class="status-badge" style="color:${statusColor};border-color:${statusColor}33;background:${statusColor}14;">
+                        ${AIDynamicApp.statusLabel(p.status)}
+                    </span>
+                </div>
+            </div>
+            <div>
+                <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Description</label>
+                <div class="text-white mt-1 text-sm leading-relaxed">${p.description || 'No description provided.'}</div>
+            </div>
+            ${p.notes ? `<div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Notes</label><div class="text-white mt-1 text-sm">${p.notes}</div></div>` : ''}
+            <div class="flex gap-3 pt-2">
+                <a href="mailto:jasmel@medicalbillingmb.com?subject=Project Update: ${encodeURIComponent(p.name || '')}" class="btn-dash btn-primary" style="text-decoration:none;">
+                    <i class="fas fa-envelope"></i> Contact Team
+                </a>
+            </div>
+        </div>
+    `;
+    modal.open(p.name || 'Project Details', content);
+}
+
+// ── Bookings ──
+function renderBookings() {
+    const container = document.getElementById('bookingsContainer');
+    if (app.loading && app.bookings.length === 0) {
+        container.innerHTML = '<div class="loading-overlay"><div class="spinner"></div></div>';
+        return;
+    }
+
+    if (app.bookings.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-calendar-alt"></i>
+                <p>No bookings yet. <a href="consulting.html" style="color:var(--electric);">Book a free consultation</a>.</p>
+            </div>`;
+        return;
+    }
+
+    const rows = app.bookings.map(b => {
+        const isUpcoming = new Date(b.booking_date || b.created_at) >= new Date() && b.status !== 'cancelled';
+        const statusColor = isUpcoming ? '#00FF88' : (b.status === 'cancelled' ? '#FF4757' : '#64748b');
+        const statusLabel = b.status === 'cancelled' ? 'Cancelled' : (isUpcoming ? 'Upcoming' : 'Past');
+        return `
+        <tr>
+            <td data-label="Service">
+                <div class="font-medium text-white">${b.service_name || 'Consultation'}</div>
+                <div class="text-xs mt-1" style="color:var(--text-muted);">${b.meeting_type || 'Strategy Call'}</div>
+            </td>
+            <td data-label="Date">${AIDynamicApp.formatDateTime(b.booking_date || b.created_at)}</td>
+            <td data-label="Status">
+                <span class="status-badge" style="color:${statusColor};border-color:${statusColor}33;background:${statusColor}14;">
+                    ${statusLabel}
+                </span>
+            </td>
+            <td data-label="Actions">
+                ${isUpcoming ? `
+                <button class="btn-dash btn-ghost btn-sm" onclick="cancelBooking('${b.id}')">
+                    <i class="fas fa-times"></i> Cancel
+                </button>` : '-'}
+            </td>
+        </tr>`;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="overflow-x-auto">
+            <table class="dash-table">
+                <thead><tr>
+                    <th>Service</th><th>Date</th><th>Status</th><th></th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </div>`;
+}
+
+async function cancelBooking(id) {
+    if (!confirm('Cancel this booking?')) return;
+    try {
+        await app.cancelBooking(id);
+        toast.show('Booking cancelled', 'success');
+        renderBookings();
+        renderStats();
+    } catch (e) {
+        toast.show('Failed to cancel: ' + e.message, 'error');
+    }
+}
+
+// ── Settings ──
+function renderSettings() {
+    const p = app.profile || {};
+    document.getElementById('settingsEmail').value = app.clientEmail || p.email || '';
+    document.getElementById('settingsCompany').value = p.company || '';
+}
+
+function saveSettings() {
+    const email = document.getElementById('settingsEmail').value.trim();
+    const company = document.getElementById('settingsCompany').value.trim();
+    if (email) {
+        app._setStoredEmail(email);
+        document.getElementById('clientEmail').textContent = email;
+    }
+    toast.show('Settings saved', 'success');
+}
+
+function resetSettings() {
+    renderSettings();
+    toast.show('Settings reset', 'info');
+}
+
+// ── Navigation ──
+function showSection(section) {
+    currentSection = section;
+
+    // Update nav
+    document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.section === section);
+    });
+
+    // Show/hide sections
+    document.querySelectorAll('.section-content').forEach(el => {
+        el.classList.toggle('hidden', el.id !== `section-${section}`);
+    });
+
+    // Close mobile sidebar
+    if (window.innerWidth <= 768) {
+        toggleSidebar();
+    }
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+}
+
+// Handle hash navigation
+window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.slice(1) || 'profile';
+    showSection(hash);
+});
+</script>
+
+</body>
+</html>
